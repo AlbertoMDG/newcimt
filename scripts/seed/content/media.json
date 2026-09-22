@@ -1,0 +1,17 @@
+{
+  "slug": "media",
+  "kind": "guide",
+  "book": "media",
+  "title": "Media",
+  "sections": [
+    {
+      "heading": "Media",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Media"
+        }
+      ]
+    }
+  ]
+}

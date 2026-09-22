@@ -1,0 +1,50 @@
+[
+  {
+    "agency_type": "HOTLINE",
+    "contact_name": "Federal OSHA Hot Line",
+    "phone": "1-800-321-6742",
+    "detail": null,
+    "comment": "Notify OSHA within 8 hours of a fatality, and within 24 hours of an in-patient hospitalization, amputation, or loss of an eye. If governed by a state OSH program, notify your state first.",
+    "sort_order": 1
+  },
+  {
+    "agency_type": "HOTLINE",
+    "contact_name": "National Response Center",
+    "phone": "1-800-424-8802",
+    "detail": null,
+    "comment": "Report releases of hazardous chemicals dispersed off-site. A written report must follow to all notified agencies within 14 calendar days.",
+    "sort_order": 2
+  },
+  {
+    "agency_type": "HOTLINE",
+    "contact_name": "24-hour Crisis Line (Emergency Exchange)",
+    "phone": "1-888-256-5388",
+    "detail": "Outside the USA: +44 7826 953 266 or +44 7826 953 710",
+    "comment": "OSI Product Recall Loss Reporting: notify the Corporate CIMT Risk Management member within 48 hours; if unavailable after 8 hours, call this line.",
+    "sort_order": 3
+  },
+  {
+    "agency_type": "HOTLINE",
+    "contact_name": "CISA · Cyber Incident / Ransom Reporting",
+    "phone": "888-282-0870",
+    "detail": "Online: https://us-cert.cisa.gov/forms/report · Email: central@cisa.dhs.gov",
+    "comment": "Notify CISA within 72 hours of a covered cyber incident and within 24 hours of any ransomware payment.",
+    "sort_order": 4
+  },
+  {
+    "agency_type": "MEDIA",
+    "contact_name": "Fleishman-Hillard, Inc. — David Saltz (Chicago office)",
+    "phone": "312-751-3530",
+    "detail": "Mobile: 312-203-2114 · Fax: 312-751-8191",
+    "comment": "Media agency of record.",
+    "sort_order": 5
+  },
+  {
+    "agency_type": "MEDIA",
+    "contact_name": "Fleishman-Hillard, Inc. — Marjorie Benzkofer (alternate)",
+    "phone": "312-706-3997",
+    "detail": null,
+    "comment": "Alternate media agency contact.",
+    "sort_order": 6
+  }
+]

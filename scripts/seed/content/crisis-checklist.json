@@ -1,0 +1,465 @@
+{
+  "slug": "crisis-checklist",
+  "kind": "checklist",
+  "book": null,
+  "title": "Crisis Checklist",
+  "sections": [
+    {
+      "heading": "Notification",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "How did the Company learn about the CI?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Who notifed the Company of the CI?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What is the person's/entity's affiliation with the Company?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Who else did the person/entity notify?"
+        }
+      ]
+    },
+    {
+      "heading": "Product",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "What product?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Package size?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Where was product manufactured? (production line)"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "When was product manufactured?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What are the product code dates?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Source of contamination? Could it be deliberate?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Where was product sold? (retail?) (food service?)"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Where was alleged contaminated product purchased?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Was product also sold to employees?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Was the product included as an ingredient in another product?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Was same product produced in another plant?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Were same lot ingredients used in another plant?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Was any of this product donated to food pantries or others?"
+        }
+      ]
+    },
+    {
+      "heading": "Consumers",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "What happened to a consumer to trigger the CI?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Where and when did it happen?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Did consumer eat our product?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What was the product?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "How much product was consumed?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "When was product consumed?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "When did symptoms of illness begin?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What were the symptoms?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Age of affected individual(s)"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "If food contamination: Health status of the affected individual(s) Have any tests been performed? What types? Anticipated time of results? Test results (if known)?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Health status of the affected individual(s)"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Have any tests been performed?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What types?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Anticipated time of results?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Test results (if known)?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "How many people actually and/or potentially were exposed and to what contaminant concentrations?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Have emergency response teams been contacted?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Have local hospitals been alerted?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has the Health Department been contacted?"
+        }
+      ]
+    },
+    {
+      "heading": "Customers",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "Has the customer been contacted?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has a media statement been developed with or by customer?"
+        }
+      ]
+    },
+    {
+      "heading": "Safety",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "Was it a chemical spill?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Type of chemical?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Was 911 called?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has the cause of the incident been determined?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Were there any witnesses to the incident?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Was the incident caused by faulty equipment?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "If so, has faulty equipment been secured?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Was prompt medical attention provided?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Medical status of injured person(s) (if known)"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has incident been logged?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Have emergency response teams been contacted?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Have local hospitals been alerted?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has the Health Department been notified?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has the National Response Center been notified within 15 minutes of applicable release?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Who is designated at the plant to call the NRC?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Who is the designated backup person to call the NRC?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has the State Emergency Response Committee been notified?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has the Local Emergency Planning Committee been notified?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has OSHA been notified? (Federal OSHA for Illinois and Wisconsin) (State OSHA for South Carolina, Iowa and Utah)"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Name of the contact person at OSHA"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "How many people have actually and/or potentially been injured?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Type of injury? Was family / next of kin notified?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Have EAP Counselors been notified?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "How many people have actually and/or potentially been exposed?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Level of contaminant concentrations?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Any adverse health effects reported following exposure or any complaints?"
+        }
+      ]
+    },
+    {
+      "heading": "Media",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "Has Fleischman-Hillard been contacted?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has a media statement been prepared? (External / Internal)"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has an overall communication plan been developed (Q&A)?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Have the spokespersons been provided with talking points?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Have the receptionist at Corporate and the affected facility been notified (for media call purposes)?"
+        }
+      ]
+    },
+    {
+      "heading": "Suppliers",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "Was contaminant in materials/ingredients supplied by Vendor?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Vendor information?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has Vendor been notified?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has Vendor instituted recall procedures?"
+        }
+      ]
+    },
+    {
+      "heading": "Regulatory Agencies",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "Has there been contact with the USDA?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has USDA been notified within 24 hours of learning of adulterated or misbranded product?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Name of representative?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Telephone contact information obtained?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has there been contact with the FDA?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Name of representative?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Telephone contact information obtained?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has there been contact with the Health Department?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Which States? Cities?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Name of representative(s)?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Telephone contact information obtained?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has there been contact with OSHA (State or Federal)?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Name of representative?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Telephone contact information obtained?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has there been contact with the NRC?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Was notification to NRC made within 15 minutes of release?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Did you receive a reporting control"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Name of representative?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Telephone contact information obtained?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has there been contact with the SERC?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Name of representative?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Telephone contact information obtained?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Has there been contact with the LEPC?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Name of representative?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "Telephone contact information obtained?"
+        }
+      ]
+    },
+    {
+      "heading": "Response Plan",
+      "blocks": [
+        {
+          "kind": "checklist_item",
+          "body": "What actions have been taken to secure the site of the CI?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What actions have been taken to stabilize the CI at a Company facility or in the community?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What actions have been taken to prevent the CI from escalating?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What actions have been taken to prevent a reoccurrence?"
+        },
+        {
+          "kind": "checklist_item",
+          "body": "What actions have been taken to restore damaged plant and equipment?"
+        }
+      ]
+    }
+  ]
+}

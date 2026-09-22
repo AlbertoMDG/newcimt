@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Tokens synced from the Claude Design "CIMT Design System" project (styles.css).
+     Dual accent: navy for interaction, OSI red reserved for emergencies. */
+  --color-paper: #f7f6f3;
+  --color-card: #ffffff;
+  --color-ink: #17191c;
+  --color-steel: #5b6370;
+  --color-line: #e6e4df;
+  --color-mist: #efede9;
+
+  --color-accent: #2e5c8a;
+  --color-accent-deep: #224669;
+  --color-accent-soft: #eaf1f8;
+
+  --color-emergency: #ce0e2d;
+  --color-emergency-deep: #9b0a22;
+  --color-emergency-soft: #fbe9ec;
+
+  --color-ok: #1d7a3d;
+  --color-ok-soft: #e6f4ea;
+
+  /* Back-compat aliases (older markup says brand/alarm = OSI red) */
+  --color-brand: #ce0e2d;
+  --color-brand-deep: #9b0a22;
+  --color-brand-soft: #fbe9ec;
+  --color-alarm: #ce0e2d;
+  --color-alarm-deep: #9b0a22;
+  --color-alarm-soft: #fbe9ec;
+
+  --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Cascadia Mono', 'Consolas', ui-monospace, monospace;
+
+  --shadow-card: 0 1px 2px rgba(23, 25, 28, 0.04), 0 8px 24px -12px rgba(23, 25, 28, 0.12);
+  --shadow-float: 0 24px 60px -20px rgba(23, 25, 28, 0.3);
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Signature mark: brand-red safety tape under the header (logo red + globe black) */
+.hazard-stripe {
+  height: 5px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-emergency) 0 16px,
+    var(--color-ink) 16px 32px
+  );
+}
+
+/* Phone numbers & codes: tabular digits, always legible */
+.tel {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "chemical",
+  "kind": "guide",
+  "book": "chemical",
+  "title": "Chemical",
+  "sections": [
+    {
+      "heading": "Ammonia",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Ammonia is a colorless gas with a strong, irritating smell. It is widely used as a refrigerant in meatpacking, poultry, and other food processing plants.\n\nHealth Factors:\n\nLegal Standards:\n\nEmergency Response:\n\nReporting:"
+        }
+      ]
+    },
+    {
+      "heading": "Natural Gas",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Natural gas is a fossil fuel.\n2. Natural gas from the United States is primarily composed of methane, which is a highly flammable chemical compound\n3. Natural gas is colorless and odorless in its pure form, but gas companies add a warning smell to it that can be easily detected if it is leaking.\n\nHealth Factors:\n\n- Exposure to low levels is not harmful to your health.\n- If a gas leak is severe, the amount of oxygen available for breathing could be dramatically reduced, which can lead to asphyxia.\n- Exposure to extremely high levels of natural gas can cause loss of consciousness or even death.\n\nLegal Standards:\n\nEmergency Response:\n\nReporting:"
+        }
+      ]
+    },
+    {
+      "heading": "Solvents",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Solvent is the term given to a group of liquid chemicals which share important similarities\n2. All solvents may affect the body's central nervous system.\n3. Solvents (which include chemicals such as benzene and toluene) are used to dilute or dissolve another substance.\n\nHealth Factors:\n\n- The precise effect of solvent exposure depends on the chemical involved.\n- If liquid solvents make contact with the skin, they may cause irritation and a rash and can damage the eyes.\n\nLegal Standards:\n\nEmergency Response:\n\nReporting:"
+        }
+      ]
+    },
+    {
+      "heading": "Chlorine Gas",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Chlorine is a greenish-yellow gas with a characteristic pungent odor.\n2. It condenses to an amber liquid at approximately -34 degrees C (-29.2 degrees F) or at high pressures.\n3. Odor thresholds ranging from 0.08 to part per million (ppm) parts of air have been reported.\n4. Prolonged exposures may result in olfactory fatigue.\n\nHealth Factors:\n\n**Low Concentrations:**\n\n1. burning eyes, nose,and throat\n2. redness in the face\n3. sneezing and coughing\n\n**High Concentrations:**\n\n1. tightness in the throat\n2. difficulty breathing\n\n- 1,000 parts per million (ppm) is fatal after a few breaths.\n- Even an hour later, 35-51 ppm can be fatal.\n\nLegal Standards:\n\nEmergency Response:\n\nReporting:"
+        }
+      ]
+    },
+    {
+      "heading": "Exhibit A",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. You must report a hazardous chemical spill to the National Response Center at (800) 424-8802 if: The release could threaten human health off the property (Ammonia and Chlorine are gases that enter the atmosphere and threatens human health off the property in virtually every release. Release of 100 lbs of Ammonia and 10 lbs. of Chlorine require notification to the NRC).\n2. When you call the National Response Center to report a hazardous chemical spill, the staff person will ask you the following questions:\n3. The facility owner or operator is also required to provide a written follow-up emergency notice within 14 days after the release. The follow-up notice or notices must:"
+        }
+      ]
+    }
+  ]
+}

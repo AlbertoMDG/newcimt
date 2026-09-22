@@ -1,0 +1,90 @@
+{
+  "externalBySite": [
+    {
+      "site": "West Jordan",
+      "contacts": [
+        { "agency_type": "OSHA", "contact_name": "Utah OSHA (UOSH)", "phone": "801-530-6901", "detail": null, "comment": "State OSH program — notify state first.", "sort_order": 1 },
+        { "agency_type": "SERC", "contact_name": "Utah SERC", "phone": "801-536-4100", "detail": null, "comment": null, "sort_order": 2 },
+        { "agency_type": "LEPC", "contact_name": "Salt Lake County LEPC", "phone": "801-743-7100", "detail": null, "comment": null, "sort_order": 3 },
+        { "agency_type": "USDA", "contact_name": "USDA FSIS Denver District", "phone": "303-236-9800", "detail": "Denver District Office", "comment": null, "sort_order": 4 },
+        { "agency_type": "FDA", "contact_name": "FDA Denver District", "phone": "303-236-3000", "detail": null, "comment": null, "sort_order": 5 },
+        { "agency_type": "GFSI", "contact_name": "BRCGS Certification Body", "phone": "312-555-0164", "detail": null, "comment": "Notify within 3 working days of a recall or significant food-safety event.", "sort_order": 6 }
+      ]
+    },
+    {
+      "site": "Riverside",
+      "contacts": [
+        { "agency_type": "OSHA", "contact_name": "Cal/OSHA", "phone": "951-782-4347", "detail": "Riverside District Office", "comment": "State OSH program — notify state first.", "sort_order": 1 },
+        { "agency_type": "SERC", "contact_name": "California SERC", "phone": "916-845-8911", "detail": null, "comment": null, "sort_order": 2 },
+        { "agency_type": "LEPC", "contact_name": "Riverside County LEPC", "phone": "951-358-5055", "detail": null, "comment": null, "sort_order": 3 },
+        { "agency_type": "USDA", "contact_name": "USDA FSIS Alameda District", "phone": "510-337-5000", "detail": null, "comment": null, "sort_order": 4 },
+        { "agency_type": "FDA", "contact_name": "FDA Los Angeles District", "phone": "949-608-2900", "detail": null, "comment": null, "sort_order": 5 }
+      ]
+    },
+    {
+      "site": "Geneva",
+      "contacts": [
+        { "agency_type": "OSHA", "contact_name": "Federal OSHA Region V", "phone": "312-353-2220", "detail": "Chicago Regional Office", "comment": null, "sort_order": 1 },
+        { "agency_type": "SERC", "contact_name": "Illinois SERC (IEMA)", "phone": "217-782-7860", "detail": null, "comment": null, "sort_order": 2 },
+        { "agency_type": "LEPC", "contact_name": "Kane County LEPC", "phone": "630-232-5985", "detail": null, "comment": null, "sort_order": 3 },
+        { "agency_type": "USDA", "contact_name": "USDA FSIS Chicago District", "phone": "312-353-9073", "detail": null, "comment": null, "sort_order": 4 }
+      ]
+    }
+  ],
+  "customers": [
+    {
+      "name": "McDonald's",
+      "region": "NA",
+      "notes": "Follow the McDonald's Critical Incident communication process before any external statement.",
+      "contacts": [
+        { "side": "osi_primary", "name": "Kevin Scott", "title": "SVP, North America", "work_phone": "630-438-9345", "cell_phone": "630-555-0118", "email": "kscott@osigroup.com", "note": null, "sort_order": 1 },
+        { "side": "osi_alternate", "name": "Sherry Duffy", "title": "VP Quality Assurance", "work_phone": "630-438-9312", "cell_phone": "630-555-0142", "email": "sduffy@osigroup.com", "note": null, "sort_order": 2 },
+        { "side": "customer", "name": "Dan Harper", "title": "Director, Supply Chain Safety", "work_phone": "630-623-3000", "cell_phone": null, "email": "dan.harper@us.mcd.com", "note": "First customer-side call for any product event.", "sort_order": 3 },
+        { "side": "customer", "name": "Alexis Warren", "title": "Sr. Manager, Quality Systems", "work_phone": "630-623-3210", "cell_phone": null, "email": "alexis.warren@us.mcd.com", "note": null, "sort_order": 4 }
+      ]
+    },
+    {
+      "name": "Nestlé",
+      "region": "NA",
+      "notes": null,
+      "contacts": [
+        { "side": "osi_primary", "name": "Mark Yates", "title": "Account Director", "work_phone": "630-438-9377", "cell_phone": "630-555-0177", "email": "myates@osigroup.com", "note": null, "sort_order": 1 },
+        { "side": "customer", "name": "Priya Raman", "title": "Supplier Quality Lead", "work_phone": "440-264-5000", "cell_phone": null, "email": "priya.raman@us.nestle.com", "note": null, "sort_order": 2 }
+      ]
+    }
+  ],
+  "constituentsBySite": [
+    {
+      "site": "West Jordan",
+      "places": [
+        { "section": "Police & Fire", "section_sort": 1, "place_name": "West Jordan Police Department", "address": "8040 S Redwood Rd, West Jordan, UT 84088", "notes": "Emergency: 911", "contacts": [ { "name": "Non-emergency dispatch", "title": null, "phone": "801-840-4000", "cell": null, "email": null, "sort_order": 1 } ] },
+        { "section": "Police & Fire", "section_sort": 1, "place_name": "West Jordan Fire Department", "address": "7602 S Jordan Landing Blvd, West Jordan, UT 84084", "notes": "Emergency: 911", "contacts": [ { "name": "Station 53", "title": null, "phone": "801-260-7300", "cell": null, "email": null, "sort_order": 1 } ] },
+        { "section": "Hospitals", "section_sort": 2, "place_name": "Jordan Valley Medical Center", "address": "3580 W 9000 S, West Jordan, UT 84088", "notes": "Nearest emergency room.", "contacts": [ { "name": "Emergency Department", "title": null, "phone": "801-561-8888", "cell": null, "email": null, "sort_order": 1 } ] },
+        { "section": "Utilities", "section_sort": 3, "place_name": "Rocky Mountain Power", "address": null, "notes": "Power outages and line emergencies.", "contacts": [ { "name": "Outage line", "title": null, "phone": "1-877-508-5088", "cell": null, "email": null, "sort_order": 1 } ] },
+        { "section": "Utilities", "section_sort": 3, "place_name": "Dominion Energy (natural gas)", "address": null, "notes": "Gas leaks: leave the area first, then call.", "contacts": [ { "name": "Emergency line", "title": null, "phone": "1-800-767-1689", "cell": null, "email": null, "sort_order": 1 } ] }
+      ]
+    },
+    {
+      "site": "Geneva",
+      "places": [
+        { "section": "Police & Fire", "section_sort": 1, "place_name": "Geneva Police Department", "address": "20 Police Plaza, Geneva, IL 60134", "notes": "Emergency: 911", "contacts": [ { "name": "Non-emergency", "title": null, "phone": "630-232-4736", "cell": null, "email": null, "sort_order": 1 } ] },
+        { "section": "Hospitals", "section_sort": 2, "place_name": "Northwestern Medicine Delnor Hospital", "address": "300 Randall Rd, Geneva, IL 60134", "notes": null, "contacts": [ { "name": "Main line", "title": null, "phone": "630-208-3000", "cell": null, "email": null, "sort_order": 1 } ] },
+        { "section": "Local officials", "section_sort": 4, "place_name": "City of Geneva — Mayor's Office", "address": "22 S First St, Geneva, IL 60134", "notes": null, "contacts": [ { "name": "City administration", "title": null, "phone": "630-232-7494", "cell": null, "email": null, "sort_order": 1 } ] }
+      ]
+    }
+  ],
+  "warRoomsBySite": [
+    { "site": "West Jordan", "war_room_location": "Main conference room, front office (2nd floor)", "war_room_phone": "801-871-4100", "direct_line": "801-871-4129", "direct_fax": "801-871-4198", "conference_phone": "1-877-402-9753", "conference_access_code": "8014412", "revised_at": "2026-05-14" },
+    { "site": "Riverside", "war_room_location": "QA training room, building B", "war_room_phone": "951-360-2700", "direct_line": "951-360-2711", "direct_fax": null, "conference_phone": "1-877-402-9753", "conference_access_code": "9513602", "revised_at": "2026-03-02" },
+    { "site": "Geneva", "war_room_location": "Plant manager's conference room", "war_room_phone": "630-232-6500", "direct_line": "630-232-6521", "direct_fax": "630-232-6598", "conference_phone": "1-877-402-9753", "conference_access_code": "6302326", "revised_at": "2026-07-21" }
+  ],
+  "resources": [
+    { "title": "Event Log", "category": "During the incident", "file_name": "EventLog.xls", "url": null, "sort_order": 1 },
+    { "title": "Telephone Log", "category": "During the incident", "file_name": "Telephone Log.docx", "url": null, "sort_order": 2 },
+    { "title": "CIMT Roles & Responsibilities", "category": "Reference", "file_name": "cimtRoles.pdf", "url": null, "sort_order": 3 },
+    { "title": "Process Flow (PDF)", "category": "Reference", "file_name": "chart.pdf", "url": null, "sort_order": 4 },
+    { "title": "External Notifications (PDF)", "category": "Reference", "file_name": "externalnotifications.pdf", "url": null, "sort_order": 5 },
+    { "title": "McDonald's CI Communication Process", "category": "Customers", "file_name": "McD_CI_Communication_Process.pdf", "url": null, "sort_order": 6 },
+    { "title": "Recall Questionnaire Response", "category": "Recall", "file_name": "Questionnaire Response.pdf", "url": null, "sort_order": 7 }
+  ]
+}

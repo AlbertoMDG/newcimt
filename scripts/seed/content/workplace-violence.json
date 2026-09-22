@@ -1,0 +1,116 @@
+{
+  "slug": "workplace-violence",
+  "kind": "guide",
+  "book": "workplace-violence",
+  "title": "Workplace Violence",
+  "sections": [
+    {
+      "heading": "Bomb Threat or Suspicious Device",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Immediately dial 911 and report the threat.\n2. If the threat was made by phone, include details such as background noises and voice characteristics of the caller.\n3. In any instance in which a suspicious package or item is observed (e.g., a package, suitcase, knapsack, etc., whose appearance and/or location appears implausible), contact Security.\n4. Do not inspect or touch any suspicious items.\n5. Leave the threatened facility or area of the suspicious device and go to a place that is out of the line of sight to the threat location and provides shielding (for example, place another building between you and the threat location).\n6. Go to an assembly area as directed by emergency services personnel."
+        }
+      ]
+    },
+    {
+      "heading": "Civil Disturbance or Demonstration",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "*Most demonstrations such as marches, meetings, picketing and rallies will be peaceful and non-obstructive. However, in the event of violent civil disorder, it is important to take protective action.*\n\n1. Seek shelter indoors and monitor information sources.\n2. Stay away from doors and windows.\n3. Do not interfere with those persons creating the disturbance or with authorities on the scene.\n4. Follow the instructions of public safety and law enforcement personnel."
+        }
+      ]
+    },
+    {
+      "heading": "Explosion",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "*Signs of an explosion may be a very loud noise or series of noises and vibrations, fire, heat or smoke, falling glass or debris, or building damage. If you suspect that an explosion has occurred:*\n\n1. Immediately evacuate the building as quickly and calmly as possible.\n2. Activate the nearest alarm pull station as you exit.\n\n*In the event of fire or smoke, refer to the Fire Evacuation procedures.*"
+        }
+      ]
+    },
+    {
+      "heading": "Fire Evacuation",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Evacuate the building immediately at the sound of an alarm. Evacuation should be made via the nearest safe exit.\n2. Once you have exited the building, stay out. Under no circumstance are you allowed to re-enter a building that is in alarm. Re-entry can only be made after an \"all-clear\" signal is given by the Fire Department.\n3. If conditions permit, close all doors as you leave in order to help contain the fire and smoke.\n4. If you have to exit through smoke, crawl low to your exit keeping your head one or two feet above the floor, where the air will be cleanest.\n5. Test doorknobs and spaces around the door with the back of your hand. If the door is warm, try another escape route. If it's cool, open it slowly. Slam it shut if smoke pours through.\n6. Use the stairs; never use an elevator during a fire.\n7. If you are trapped, call 911 and tell them your location."
+        }
+      ]
+    },
+    {
+      "heading": "Tornado Evacuation",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Upon supervisory notification of a tornado warning or hearing the Tornado Alarm, all employees will immediately evacuate to the designated holding areas.\n2. Employees shall follow emergency shut down procedures prior to evacuating.\n3. Supervisors shall check their work areas (if safely possible) before seeking shelter to ensure that all persons have received the warning notice and have evacuated to the designated holding area. NO OUTSIDE SEARCHES WILL BE MADE.\n4. Headcount Coordinators will account for all persons at the designated holding areas and report this information to the Emergency Coordinator.\n5. Security or alternate assigned personnel will monitor the weather conditions with the working battery-operated Emergency Weather Radio.\n6. When the Tornado Warning is cancelled or downgraded, the Emergency Coordinator will determine if continued weather monitoring is advisable and take the appropriate steps as necessary.\n7. All persons shall remain in the protective shelter until the Tornado Warning Notice has been terminated, conditions are safe and they are instructed to return to their work areas or to leave the building.\n8. As soon as conditions permit, the General Manager or Emergency Coordinator shall have the work area inspected for damage.\n9. If there is no damage to the property, production may resume immediately after the General Manager, or the Emergency Coordinator has determined it is safe. If direct damages or injuries have occurred, the General Manager or Emergency Coordinator shall inspect the premises to assure operations can safely resume."
+        }
+      ]
+    },
+    {
+      "heading": "Emergency Procedures for Severe Weather",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. In the event that severe weather approaches, the General Manager or Emergency Coordinator shall notify supervisors to have all personnel evacuate to an inside protective shelter.\n2. The supervisors shall notify all affected employees to calmly evacuate to the inside protective shelter (this area may be the employee's assigned inside work area or another are inside the facility).\n3. The inside protected area will be designated by the Emergency Coordinator at the time of the warning.\n4. Employees should follow emergency shut down procedures prior to evacuating.\n5. Supervisors should check their work areas (if safely possible) before seeking shelter to ensure that all persons have received the warning notice and gone to their designated locations.\n6. Headcount Coordinators will account for all persons at the designated locations and report this information to the Emergency Coordinator.\n7. Security will monitor the weather conditions with a working battery-operated Emergency Weather Radio.\n8. When the severe weather warning is cancelled or downgraded, the Emergency Coordinator will determine if continued weather monitoring is advisable and take the appropriate steps as necessary.\n9. All persons shall remain in their designated locations until the severe weather warning notice has been terminated, conditions are safe and they are instructed to return to their work areas or leave the building.\n10. As soon as conditions permit, the Emergency Coordinator shall have the work area inspected for damage.\n11. If there is no damage to the property, production may resume immediately after the Emergency Coordinator has determined it is safe. If direct damages or injuries have occurred, the Emergency Coordinator shall inspect the premises to assure operations can safely resume."
+        }
+      ]
+    },
+    {
+      "heading": "Hurricane",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "During Hurricane:\n\nPost Hurricane:"
+        }
+      ]
+    },
+    {
+      "heading": "Medical Emergencies",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "Minor:\n\nMajor:\n\nFatality or Hospitalization:"
+        }
+      ]
+    },
+    {
+      "heading": "Utility Emergencies",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. The General Manager or Emergency Coordinator will determine the extent of the utility emergency and contact the appropriate repair and emergency response personnel.\n2. Situations of an isolated nature (i.e., power outage or water main break) that can be resolved quickly and safely may only require a partial evacuation or temporary shutdown of operations.\n3. If an evacuation is necessary, the fire alarm will sound to notify persons in the building to leave through the closest exit that is accessible in a calm, orderly manner.\n4. The Emergency Coordinator shall ensure that the Fire Department has been notified.\n5. For gas leaks, electrical power failure, or water main breaks, the maintenance department shall determine the extent of the leak, failure, or break and notify the Emergency Coordinator. The Emergency Coordinator shall notify the service provider to facilitate repairs as needed.\n6. It may be necessary to shut down other utility lines or systems that might present a hazard. If necessary, coordinate with maintenance personnel, utility companies, and the fire department if additional lines or systems need to be shut down.\n7. As conditions permit, inspect the site for damage or other problems and provide reentry recommendations. Provide Emergency repair services as necessary and appropriate.\n8. Recall evacuated employees when it is safe to do so."
+        }
+      ]
+    },
+    {
+      "heading": "Flood and Water Damage",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. If a water leak occurs call the Fire Department.\n2. Advise the dispatcher of the location and severity of the leak.\n3. If there are electrical appliances or electrical outlets near the leak, use extreme caution. If there is any possible danger from electricity, evacuate the area.\n4. When moving through wet or flooded areas use caution to avoid slipping."
+        }
+      ]
+    },
+    {
+      "heading": "Hostile Intruder/Active Shooter",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "*An individual must use his/her own discretion during an event as to whether he/she chooses to run to safety or remain in place. However, best practices are listed.*\n\nIf outside when a shooting occurs:\n\nIf suspect is within close proximity:"
+        }
+      ]
+    },
+    {
+      "heading": "Workplace Violence",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "*Workplace violence is any physical assault, threatening, or intimidating behavior, or verbal abuse, perpetrated by anyone and occurring in the work setting.*\n\n1. Disengage and evacuate the area.\n2. Isolate the threatening individual if it is safe to do so.\n3. Notify the supervisor.\n4. Do whatever is responsible to keep other employees from potential harm."
+        }
+      ]
+    }
+  ]
+}

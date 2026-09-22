@@ -1,0 +1,35 @@
+{
+  "slug": "food",
+  "kind": "guide",
+  "book": "food",
+  "title": "Food",
+  "sections": [
+    {
+      "heading": "Biological Hazards",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "Norovirus Infection\n\nGeneral:\n\n1. Norovirus is also called gastroenteritis, food poisoning and calicivirus\n2. It is an inflammation of the stomach and the small and large intestines\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:\n\nHepatitis A Infection\n\nGeneral:\n\n1. Hepatitis A is a viral infection\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:\n\nSTEC or E. coli O157:H7\n\nGeneral:\n\n*Hemolytic uremic syndrome (HUS) is an uncommon, but serious condition that can cause life-threatening kidney failure. Hemolytic uremic syndrome most often affects children and older adults. In children, most cases of hemolytic uremic syndrome develop after several days of diarrhea  often bloody  due to infection with a specific strain of Escherichia coli (E. coli). Adults also may develop hemolytic uremic syndrome after an E. coli infection, but more often the cause is obscure or even unknown. Signs and symptoms of hemolytic uremic syndrome may include: fever, abdominal pain, pale skin tone, fatigue and irritability, small, unexplained bruises or bleeding from the nose and mouth, decreased urination, swelling of the face, hands, feet or entire body. Sometimes neurological symptoms, such as seizures, develop as well.\n\n1. E. coli O157:H7 is one of hundreds of strains of the bacterium Escherichia coli.\n2. Although most strains are harmless, E. coli O157:H7 produces a powerful toxin and can cause severe illness.\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:\n\nListeriosis\n\nGeneral:\n\n1. Listeria is a serious infection caused by eating food contaminated with the bacterium Listeria monocytogenes.\n2. The disease affects primarily pregnant women, newborns, and adults with weakened immune systems.\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:\n\nSalmonellosis\n\nGeneral:\n\nMulti Drug Resistant (MDR) Salmonella are becoming a primary pathogen of concern as there are few to no treatment remedies.\n\n1. Salmonellosis is an infection with a bacteria called Salmonella.\n2. Salmonella live in the intestinal tracts of animals, including birds.\n3. Salmonella are usually transmitted to humans by eating foods contaminated with animal feces.\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:\n\nClostridium Perfringens\n\nGeneral:\n\n1. Clostridium perfringens is one of the most common causes of foodborne gastroenteritis\n2. Known as the Cafeteria Bug most outbreaks associated with food prepared in institutional settings\n3. The causative factor of C. perfringens food poisoning is an enterotoxin, which is a toxin produced by the bacteria that is specific for intestinal cells\n4. The organism is ubiquitous and is found in soil, plants, animals, and humans\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:\n\nCampylobacteriosis\n\nGeneral:\n\n1. Campylobacter jejuni is estimated to be the third leading bacterial cause of foodborne illness in the U.S\n2. Most common form of illness is gastroenteritis called Campylobacterosis\n3. Campylobacterosis may cause autoimmune disorders and other long-term complications for example Guillain-Barré syndrome (GBS) and reactive arthritis\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:\n\nStaphylococcus aureus\n\nGeneral:\n\n1. Staphylococcus aureus is the leading cause of skin and soft tissue infections.\n2. Staph food poisoning is a type of food poisoning caused by infection with the Staphylococcus aureus bacterium.\n3. The bacteria multiply in foods and produce a toxin even at refrigerator temperatures.\n4. The toxins may be present in dangerous amounts in foods that have no signs of spoilage, such as a bad smell.\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:\n\nMold\n\nGeneral:\n\n1. Mold spores swell and burst their walls and send out short threads. These threads root into the food to provide nourishment for the mold spores.\n2. As the spores on the surface of the food ripen, the food develops an unpleasant musty odor which destroys the fresh flavor of food.\n3. Certain molds may produce poisonous toxins called mycotoxins.\n4. Aflatoxin is a mycotoxin that grows on nuts, corn, wheat and other grains and may be found in products made from these foods.\n\nCause/Transmission:\n\nSymptoms:\n\nDuration:"
+        }
+      ]
+    },
+    {
+      "heading": "Physical Hazards",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "Hard/Sharp Metal\n\nSource:\n\n1. Meat Raw Materials (buck-shot)\n2. Processing Equipment Metal to metal contact (Grinders/mixers/blenders); Slicers; Wire-mesh belts; Sieves; Screens; Knives\n3. Dry Ingredients (spices/seasonings)  sifter screens/sieves\n4. People: Hair pins; Jewelry\n\nSize - Injury:\n\nControl:\n\nBone\n\nSource:\n\n1. Meat/Poultry Raw Material\n\nSize - Injury:\n\n1. Bone particles: < 1 cm not a safety hazard\n2. 1-2 cm are a low risk;\n3. > 2 cm have the potential to be a safety hazard and may cause injury\n\nControl:\n\nWood\n\nSource:\n\n1. Wooden Pallets\n\nSize - Injury:\n\nControl:\n\nPlastic\n\nSource:\n\n1. Soft: poly liners; packaging film\n2. Hard: colored totes & scoops; equipment control buttons; equipment belts; light covers;\n\nSize - Injury:\n\nControl:"
+        }
+      ]
+    },
+    {
+      "heading": "Chemical Hazards",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "Allergens\n\nType:\n\n1. Milk\n2. Eggs\n3. Wheat\n4. Soybean\n5. Fish\n6. Crustacean shellfish\n7. Peanuts\n8. Tree nuts\n\nSource:\n\nSymptoms:\n\nControl:\n\nIngredients of Public Health Concern\n\nType:\n\n1. MSG\n2. Sulfites\n3. Unapproved Color Additives (Yellow 5 & 6)\n\nSource:\n\n1. Ingredients\n\nSymptoms:\n\nControl:\n\nRadiological\n\nType:\n\n1. Radiological\n\nSource:\n\nSymptoms:\n\nControl:\n\nChemicals\n\nType:\n\n1. Cleaners/Sanitizers\n2. Lubricants\n\nSource:\n\nSymptoms:\n\nControl:"
+        }
+      ]
+    }
+  ]
+}
