@@ -8,6 +8,8 @@ export class HttpError extends Error {
 
 export const notFound = (msg = 'Not found') => new HttpError(404, msg)
 export const badRequest = (msg: string, details?: unknown) => new HttpError(400, msg, details)
+export const unauthorized = (msg = 'Not signed in') => new HttpError(401, msg)
+export const forbidden = (msg = 'Not allowed') => new HttpError(403, msg)
 
 export function errorMiddleware(err: unknown, _req: Request, res: Response, _next: NextFunction) {
   if (err instanceof HttpError) {

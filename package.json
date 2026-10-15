@@ -12,6 +12,9 @@
     "db:check": "npm --prefix server run db:check",
     "db:migrate": "npm --prefix server run db:migrate",
     "db:seed": "npm --prefix server run db:seed",
+    "db:seed-admin": "npm --prefix server run db:seed-admin",
+    "verify:encryption": "npm --prefix server run verify:encryption",
+    "rotate:master-key": "npm --prefix server run rotate:master-key",
     "import:excel": "npm --prefix server run import:excel"
   },
   "dependencies": {

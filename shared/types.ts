@@ -1,5 +1,12 @@
 // DTOs shared between the React app and the Express API.
 
+export interface SessionUser {
+  user_id: number
+  email: string
+  display_name: string
+  is_admin: boolean
+}
+
 export interface Site {
   site_id: number
   code: string
@@ -188,4 +195,106 @@ export interface Stats {
   war_rooms: number
   content_pages: number
   resources: number
+  incidents: number
+  active_incidents: number
+  users: number
+}
+
+// ---------- digital war rooms (incidents) ----------
+
+export type IncidentType =
+  | 'food_safety' | 'workplace' | 'environmental' | 'security'
+  | 'cyber' | 'product_recall' | 'other'
+export type IncidentSeverity = 'low' | 'medium' | 'high' | 'critical'
+export type IncidentStatus = 'active' | 'closed' | 'archived'
+export type IncidentRole = 'commander' | 'member' | 'observer'
+
+export interface Incident {
+  incident_id: number
+  title: string
+  incident_type: IncidentType
+  site_id: number | null
+  severity: IncidentSeverity
+  status: IncidentStatus
+  summary: string | null
+  key_version: number
+  created_at: string
+  created_by: number
+  closed_at: string | null
+  closed_by: number | null
+  updated_at: string
+  /** caller's role in this room; null for an admin who is not a member */
+  my_role: IncidentRole | null
+  member_count?: number
+}
+
+export interface IncidentMember {
+  member_id: number
+  incident_id: number
+  user_id: number
+  role: IncidentRole
+  added_at: string
+  display_name: string
+  email: string
+}
+
+export interface UserAccount {
+  user_id: number
+  email: string
+  display_name: string
+  entra_oid: string | null
+  is_admin: boolean
+  is_active: boolean
+  created_at: string
+  last_login_at: string | null
+  updated_at: string
+}
+
+export interface DirectoryUser {
+  user_id: number
+  display_name: string
+  email: string
+}
+
+export interface IncidentFolder {
+  folder_id: number
+  incident_id: number
+  parent_folder_id: number | null
+  name: string
+  created_at: string
+  created_by: number
+}
+
+export interface IncidentFile {
+  file_id: number
+  incident_id: number
+  folder_id: number | null
+  original_name: string
+  content_type: string | null
+  size_bytes: number
+  uploaded_at: string
+  uploaded_by: number
+  uploader_name: string
+}
+
+export interface IncidentAuditEntry {
+  audit_id: number
+  incident_id: number
+  user_id: number | null
+  action: string
+  detail: string | null
+  created_at: string
+  actor_name: string | null
+}
+
+export type MessageKind = 'chat' | 'event' | 'decision' | 'system'
+
+export interface IncidentMessage {
+  message_id: number
+  incident_id: number
+  user_id: number
+  kind: MessageKind
+  body: string
+  created_at: string
+  display_name: string
 }

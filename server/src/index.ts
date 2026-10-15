@@ -1,13 +1,17 @@
 import express from 'express'
+import cookieParser from 'cookie-parser'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import api from './routes/api.ts'
+import auth from './routes/auth.ts'
 import { errorMiddleware } from './errors.ts'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const app = express()
 
 app.use(express.json({ limit: '2mb' }))
+app.use(cookieParser())
+app.use('/api/auth', auth) // login/logout are the only unauthenticated endpoints
 app.use('/api', api)
 
 // Production/demo mode: serve the built frontend from dist/

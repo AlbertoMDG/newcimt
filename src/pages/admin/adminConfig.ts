@@ -11,6 +11,8 @@ export interface FieldSpec {
   optionSource?: OptionSource
   /** select only: allow empty (null) choice */
   nullable?: boolean
+  /** initial value when creating a new record (e.g. checkboxes that default on) */
+  defaultValue?: string | number | boolean
 }
 
 export interface ColumnSpec {
@@ -43,6 +45,26 @@ const regionOptions = [
 ]
 
 export const entities: Record<string, EntityConfig> = {
+  users: {
+    title: 'Users',
+    endpoint: '/users',
+    idKey: 'user_id',
+    invalidates: ['users', 'directory', 'stats'],
+    columns: [
+      { key: 'display_name', label: 'Name' },
+      { key: 'email', label: 'Email' },
+      { key: 'is_admin', label: 'Admin' },
+      { key: 'is_active', label: 'Active' },
+    ],
+    searchKeys: ['display_name', 'email'],
+    fields: [
+      { name: 'display_name', label: 'Name', required: true },
+      { name: 'email', label: 'Email', required: true },
+      { name: 'password', label: 'Password (min 10 chars; leave blank to keep current)' },
+      { name: 'is_admin', label: 'Administrator', type: 'checkbox' },
+      { name: 'is_active', label: 'Active', type: 'checkbox', defaultValue: true },
+    ],
+  },
   sites: {
     title: 'Sites',
     endpoint: '/sites',

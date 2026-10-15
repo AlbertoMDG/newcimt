@@ -39,7 +39,7 @@ function FormModal({ cfg, row, lookups, onClose, onSubmit, saving, error }: {
 }) {
   const defaults: Record<string, unknown> = {}
   for (const f of cfg.fields) {
-    let v = row?.[f.name] ?? (f.type === 'checkbox' ? false : '')
+    let v = row?.[f.name] ?? f.defaultValue ?? (f.type === 'checkbox' ? false : '')
     if (f.type === 'date' && typeof v === 'string' && v) v = v.slice(0, 10)
     defaults[f.name] = v ?? ''
   }

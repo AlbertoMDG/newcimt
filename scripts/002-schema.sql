@@ -220,6 +220,180 @@ BEGIN
 END
 GO
 
+IF OBJECT_ID('dbo.users', 'U') IS NULL
+BEGIN
+  CREATE TABLE dbo.users (
+    user_id INT IDENTITY(1,1) PRIMARY KEY,
+    email NVARCHAR(256) NOT NULL UNIQUE,
+    display_name NVARCHAR(200) NOT NULL,
+    password_hash NVARCHAR(300) NULL,  -- scrypt; NULL once the account is SSO-only
+    entra_oid NVARCHAR(64) NULL,       -- filled on first Entra ID login
+    is_admin BIT NOT NULL DEFAULT 0,
+    is_active BIT NOT NULL DEFAULT 1,
+    created_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    last_login_at DATETIME2 NULL,
+    updated_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    updated_by NVARCHAR(256) NULL
+  );
+  CREATE UNIQUE INDEX UX_users_entra_oid ON dbo.users(entra_oid) WHERE entra_oid IS NOT NULL;
+END
+GO
+
+IF OBJECT_ID('dbo.sessions', 'U') IS NULL
+BEGIN
+  CREATE TABLE dbo.sessions (
+    session_id INT IDENTITY(1,1) PRIMARY KEY,
+    token_hash BINARY(32) NOT NULL UNIQUE,  -- SHA-256; the raw token only lives in the cookie
+    user_id INT NOT NULL REFERENCES dbo.users(user_id) ON DELETE CASCADE,
+    created_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    expires_at DATETIME2 NOT NULL,
+    revoked_at DATETIME2 NULL,
+    ip NVARCHAR(45) NULL,
+    user_agent NVARCHAR(300) NULL
+  );
+  CREATE INDEX IX_sessions_user ON dbo.sessions(user_id);
+END
+GO
+
+-- Digital war rooms. One row per formal incident; "war room" is only the UI label
+-- (dbo.war_rooms above is the physical-rooms directory, a different thing).
+IF OBJECT_ID('dbo.incidents', 'U') IS NULL
+BEGIN
+  CREATE TABLE dbo.incidents (
+    incident_id INT IDENTITY(1,1) PRIMARY KEY,
+    title NVARCHAR(200) NOT NULL,
+    incident_type NVARCHAR(32) NOT NULL
+      CHECK (incident_type IN ('food_safety','workplace','environmental','security','cyber','product_recall','other')),
+    site_id INT NULL REFERENCES dbo.sites(site_id),
+    severity NVARCHAR(16) NOT NULL DEFAULT 'medium' CHECK (severity IN ('low','medium','high','critical')),
+    status NVARCHAR(16) NOT NULL DEFAULT 'active' CHECK (status IN ('active','closed','archived')),
+    summary NVARCHAR(MAX) NULL,
+    data_key VARBINARY(256) NOT NULL,  -- per-incident AES-256 key, wrapped by the master key
+    key_version INT NOT NULL DEFAULT 1,
+    created_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    created_by INT NOT NULL REFERENCES dbo.users(user_id),
+    closed_at DATETIME2 NULL,
+    closed_by INT NULL REFERENCES dbo.users(user_id),
+    updated_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    updated_by NVARCHAR(256) NULL
+  );
+END
+GO
+
+IF OBJECT_ID('dbo.incident_members', 'U') IS NULL
+BEGIN
+  CREATE TABLE dbo.incident_members (
+    member_id INT IDENTITY(1,1) PRIMARY KEY,
+    incident_id INT NOT NULL REFERENCES dbo.incidents(incident_id) ON DELETE CASCADE,
+    user_id INT NOT NULL REFERENCES dbo.users(user_id),
+    role NVARCHAR(16) NOT NULL DEFAULT 'member' CHECK (role IN ('commander','member','observer')),
+    added_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    added_by INT NULL REFERENCES dbo.users(user_id),
+    CONSTRAINT UQ_incident_members UNIQUE (incident_id, user_id)
+  );
+  CREATE INDEX IX_incident_members_user ON dbo.incident_members(user_id);
+END
+GO
+
+-- War-room chat. Immutable by design (no edited_at/deleted_at — legal record).
+-- Message bodies are encrypted at rest with the incident's data key (AES-256-GCM).
+-- kind: 'chat' = conversation; 'event'/'decision' = formal coordinator entries
+-- (feed the timeline); 'system' = server-generated ("X was added").
+IF OBJECT_ID('dbo.incident_messages', 'U') IS NULL
+BEGIN
+  CREATE TABLE dbo.incident_messages (
+    message_id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    incident_id INT NOT NULL REFERENCES dbo.incidents(incident_id),
+    user_id INT NOT NULL REFERENCES dbo.users(user_id),
+    kind NVARCHAR(16) NOT NULL DEFAULT 'chat' CHECK (kind IN ('chat','event','decision','system')),
+    ciphertext VARBINARY(MAX) NOT NULL,
+    iv BINARY(12) NOT NULL,
+    auth_tag BINARY(16) NOT NULL,
+    key_version INT NOT NULL DEFAULT 1,
+    created_at DATETIME2(3) NOT NULL DEFAULT SYSUTCDATETIME()
+  );
+  CREATE INDEX IX_incident_messages ON dbo.incident_messages(incident_id, message_id);
+END
+GO
+
+-- War-room folder tree. parent_folder_id is a self-reference (no cascade —
+-- SQL Server doesn't allow it); folders with content are never deleted.
+IF OBJECT_ID('dbo.incident_folders', 'U') IS NULL
+BEGIN
+  CREATE TABLE dbo.incident_folders (
+    folder_id INT IDENTITY(1,1) PRIMARY KEY,
+    incident_id INT NOT NULL REFERENCES dbo.incidents(incident_id),
+    parent_folder_id INT NULL REFERENCES dbo.incident_folders(folder_id),
+    name NVARCHAR(255) NOT NULL,
+    created_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    created_by INT NOT NULL REFERENCES dbo.users(user_id)
+  );
+  CREATE INDEX IX_incident_folders ON dbo.incident_folders(incident_id, parent_folder_id);
+END
+GO
+
+-- War-room documents. The blob lives on disk (CIMT_FILES_DIR), encrypted with
+-- the incident's data key; this row is the metadata + chain-of-custody hash.
+-- Soft delete only: the blob and the row are never physically removed.
+IF OBJECT_ID('dbo.incident_files', 'U') IS NULL
+BEGIN
+  CREATE TABLE dbo.incident_files (
+    file_id INT IDENTITY(1,1) PRIMARY KEY,
+    incident_id INT NOT NULL REFERENCES dbo.incidents(incident_id),
+    folder_id INT NULL REFERENCES dbo.incident_folders(folder_id),
+    original_name NVARCHAR(255) NOT NULL,
+    content_type NVARCHAR(127) NULL,
+    size_bytes BIGINT NOT NULL,
+    storage_name NVARCHAR(64) NOT NULL UNIQUE,  -- server-generated uuid.bin; original name never touches disk
+    iv BINARY(12) NOT NULL,
+    auth_tag BINARY(16) NOT NULL,
+    key_version INT NOT NULL DEFAULT 1,
+    sha256 BINARY(32) NOT NULL,                 -- hash of the plaintext (integrity / chain of custody)
+    uploaded_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    uploaded_by INT NOT NULL REFERENCES dbo.users(user_id),
+    deleted_at DATETIME2 NULL,
+    deleted_by INT NULL REFERENCES dbo.users(user_id)
+  );
+  CREATE INDEX IX_incident_files ON dbo.incident_files(incident_id, folder_id);
+END
+GO
+
+-- Immutable per-incident audit trail, populated from day one (append-only;
+-- the UPDATE/DELETE-blocking trigger lands with the audit phase).
+IF OBJECT_ID('dbo.incident_audit', 'U') IS NULL
+BEGIN
+  CREATE TABLE dbo.incident_audit (
+    audit_id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    incident_id INT NOT NULL REFERENCES dbo.incidents(incident_id),
+    user_id INT NULL REFERENCES dbo.users(user_id),
+    action NVARCHAR(40) NOT NULL,
+    detail NVARCHAR(MAX) NULL,  -- JSON payload: ids, names, old/new values
+    created_at DATETIME2(3) NOT NULL DEFAULT SYSUTCDATETIME()
+  );
+  CREATE INDEX IX_incident_audit ON dbo.incident_audit(incident_id, audit_id);
+END
+GO
+
+-- Enforce append-only at the database level: not even direct SQL can rewrite
+-- the audit trail or the chat record (the app never issues UPDATE/DELETE here).
+IF OBJECT_ID('dbo.TR_incident_audit_immutable', 'TR') IS NULL
+  EXEC('CREATE TRIGGER dbo.TR_incident_audit_immutable ON dbo.incident_audit
+        INSTEAD OF UPDATE, DELETE AS
+        BEGIN
+          RAISERROR(''incident_audit is append-only (legal record)'', 16, 1);
+          ROLLBACK TRANSACTION;
+        END');
+GO
+
+IF OBJECT_ID('dbo.TR_incident_messages_immutable', 'TR') IS NULL
+  EXEC('CREATE TRIGGER dbo.TR_incident_messages_immutable ON dbo.incident_messages
+        INSTEAD OF UPDATE, DELETE AS
+        BEGIN
+          RAISERROR(''incident_messages is append-only (legal record)'', 16, 1);
+          ROLLBACK TRANSACTION;
+        END');
+GO
+
 -- Seed the 9 CIMT functions (idempotent)
 MERGE dbo.cimt_roles AS t
 USING (VALUES

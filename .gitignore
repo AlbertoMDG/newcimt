@@ -27,3 +27,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Encrypted war-room documents (never in git, never under the web root)
+server/private-files/

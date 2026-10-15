@@ -5,10 +5,13 @@ import { ErrorNote, Loading, PageHeader } from '../../components/ui'
 interface StatsShape {
   sites: number; contacts: number; assignments: number; external_contacts: number
   customers: number; constituents: number; war_rooms: number; content_pages: number
-  resources: number
+  resources: number; incidents: number; active_incidents: number; users: number
 }
 
 const tiles: { key: keyof StatsShape; label: string; to: string }[] = [
+  { key: 'active_incidents', label: 'Active incidents', to: '/admin/incidents' },
+  { key: 'incidents', label: 'All incidents', to: '/admin/incidents' },
+  { key: 'users', label: 'Users', to: '/admin/users' },
   { key: 'sites', label: 'Sites', to: '/admin/sites' },
   { key: 'contacts', label: 'Contacts', to: '/admin/contacts' },
   { key: 'assignments', label: 'Role assignments', to: '/admin/assignments' },
@@ -21,6 +24,8 @@ const tiles: { key: keyof StatsShape; label: string; to: string }[] = [
 ]
 
 const quickActions = [
+  { to: '/admin/incidents', label: 'Open a war room' },
+  { to: '/admin/users', label: 'Add a user' },
   { to: '/admin/contacts', label: 'Add a contact' },
   { to: '/admin/assignments', label: 'Assign a CIMT role' },
   { to: '/admin/external', label: 'Add an agency or hotline' },

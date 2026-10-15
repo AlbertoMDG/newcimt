@@ -1,7 +1,10 @@
 import { Link, NavLink, Outlet } from 'react-router'
+import { UserMenu } from '../../components/Layout'
 
 const entityNav = [
   { to: '/admin', label: 'Dashboard', end: true },
+  { to: '/admin/incidents', label: 'Incidents · War rooms' },
+  { to: '/admin/users', label: 'Users' },
   { to: '/admin/sites', label: 'Sites' },
   { to: '/admin/contacts', label: 'Contacts' },
   { to: '/admin/assignments', label: 'Role assignments' },
@@ -11,7 +14,7 @@ const entityNav = [
   { to: '/admin/customer-contacts', label: 'Customer contacts' },
   { to: '/admin/constituents', label: 'Constituents' },
   { to: '/admin/constituent-contacts', label: 'Constituent contacts' },
-  { to: '/admin/war-rooms', label: 'War rooms' },
+  { to: '/admin/war-rooms', label: 'Physical war rooms' },
   { to: '/admin/resources', label: 'Resources' },
   { to: '/admin/content', label: 'Guides & checklists' },
 ]
@@ -31,12 +34,15 @@ export function AdminLayout() {
               </span>
             </span>
           </Link>
-          <Link
-            to="/"
-            className="flex min-h-10 items-center rounded-lg border border-line px-4 text-sm font-bold text-ink hover:border-ink"
-          >
-            View app ›
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/"
+              className="flex min-h-10 items-center rounded-lg border border-line px-4 text-sm font-bold text-ink hover:border-ink"
+            >
+              View app ›
+            </Link>
+            <UserMenu />
+          </div>
         </div>
         <div className="hazard-stripe" />
       </header>

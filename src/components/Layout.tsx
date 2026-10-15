@@ -1,8 +1,48 @@
 import type { ReactNode } from 'react'
-import { Link, NavLink, Outlet } from 'react-router'
+import { Link, NavLink, Outlet, useLocation } from 'react-router'
+import { useIncidents, useLogout, useMe } from '../api/client'
+import { Avatar } from './ui'
+
+/** Global banner while an incident the user can see is active. */
+function ActiveIncidentBanner() {
+  const { data: incidents } = useIncidents()
+  const location = useLocation()
+  const active = (incidents ?? []).filter((i) => i.status === 'active')
+  if (active.length === 0 || location.pathname.startsWith('/incidents')) return null
+  const first = active[0]
+  return (
+    <Link
+      to={active.length === 1 ? `/incidents/${first.incident_id}` : '/incidents'}
+      className="block bg-emergency px-4 py-2.5 text-center text-sm font-bold text-white hover:bg-emergency-deep"
+    >
+      ⚑ Active incident{active.length > 1 ? `s (${active.length})` : `: ${first.title}`} — open war room ›
+    </Link>
+  )
+}
+
+/** Signed-in user chip with sign-out; shared by the public shell and the admin layout. */
+export function UserMenu() {
+  const { data: me } = useMe()
+  const logout = useLogout()
+  if (!me) return null
+  return (
+    <div className="flex items-center gap-2">
+      <span title={me.email}><Avatar name={me.display_name} /></span>
+      <button
+        type="button"
+        onClick={() => logout.mutate()}
+        disabled={logout.isPending}
+        className="min-h-10 rounded-lg px-2 text-sm font-semibold text-steel hover:text-ink"
+      >
+        Sign out
+      </button>
+    </div>
+  )
+}
 
 const navItems = [
   { to: '/', label: 'Home', icon: '⌂', end: true },
+  { to: '/incidents', label: 'War Room', icon: '⚑' },
   { to: '/contacts', label: 'Contacts', icon: '☎' },
   { to: '/checklist', label: 'Checklist', icon: '☑' },
   { to: '/flow', label: 'Flow', icon: '➔' },
@@ -34,6 +74,7 @@ function NavItems({ vertical = false }: { vertical?: boolean }) {
 }
 
 export function Shell({ children }: { children?: ReactNode }) {
+  const { data: me } = useMe()
   return (
     <div className="flex min-h-dvh flex-col pb-20 sm:pb-0">
       <header className="sticky top-0 z-20 bg-card shadow-sm">
@@ -50,24 +91,34 @@ export function Shell({ children }: { children?: ReactNode }) {
           </Link>
           <nav className="hidden items-center gap-1 sm:flex">
             <NavItems />
-            <NavLink
-              to="/admin"
-              className={({ isActive }) =>
-                'ml-3 flex min-h-10 items-center rounded-full px-4 text-sm font-bold ' +
-                (isActive
-                  ? 'bg-ink text-white'
-                  : 'bg-accent text-white hover:bg-accent-deep')
-              }
-            >
-              Admin
-            </NavLink>
+            {me?.is_admin ? (
+              <NavLink
+                to="/admin"
+                className={({ isActive }) =>
+                  'ml-3 flex min-h-10 items-center rounded-full px-4 text-sm font-bold ' +
+                  (isActive
+                    ? 'bg-ink text-white'
+                    : 'bg-accent text-white hover:bg-accent-deep')
+                }
+              >
+                Admin
+              </NavLink>
+            ) : null}
+            <span className="ml-2"><UserMenu /></span>
           </nav>
-          <NavLink to="/admin" className="text-sm font-bold text-accent sm:hidden">
-            Admin
-          </NavLink>
+          <div className="flex items-center gap-3 sm:hidden">
+            {me?.is_admin ? (
+              <NavLink to="/admin" className="text-sm font-bold text-accent">
+                Admin
+              </NavLink>
+            ) : null}
+            <UserMenu />
+          </div>
         </div>
         <div className="hazard-stripe" />
       </header>
+
+      <ActiveIncidentBanner />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 lg:py-8">
         {children ?? <Outlet />}
@@ -90,7 +141,7 @@ export function Shell({ children }: { children?: ReactNode }) {
         </div>
       </footer>
 
-      <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-line bg-card pb-[env(safe-area-inset-bottom)] sm:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t border-line bg-card pb-[env(safe-area-inset-bottom)] sm:hidden">
         <NavItems vertical />
       </nav>
     </div>

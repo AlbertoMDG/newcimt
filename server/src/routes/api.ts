@@ -3,6 +3,9 @@ import { z } from 'zod'
 import { getPool, sql } from '../db.ts'
 import { makeCrudRouter } from '../crud.ts'
 import { notFound } from '../errors.ts'
+import { adminWrites, requireAdmin, requireAuth } from '../auth.ts'
+import incidents from './incidents.ts'
+import users from './users.ts'
 
 const api = Router()
 
@@ -11,7 +14,7 @@ const optStr = (max: number) => z.string().trim().max(max).nullable().optional()
   .transform((v) => (v === '' ? null : v ?? null))
 const sort = z.coerce.number().int().default(0)
 
-// ---------- health ----------
+// ---------- health (public, for monitoring) ----------
 api.get('/health', async (_req, res) => {
   try {
     const pool = await getPool()
@@ -21,6 +24,29 @@ api.get('/health', async (_req, res) => {
     res.status(503).json({ status: 'degraded', db: 'down' })
   }
 })
+
+// Everything below is behind login; /api/auth/* (mounted separately) handles sign-in.
+api.use(requireAuth)
+
+// Member-gated writes — must sit above the adminWrites gate
+api.use('/incidents', incidents)
+
+// Active-user directory so commanders can pick members (full CRUD stays admin-only)
+api.get('/directory', async (_req, res, next) => {
+  try {
+    const pool = await getPool()
+    const r = await pool.request().query(
+      'SELECT user_id, display_name, email FROM dbo.users WHERE is_active = 1 ORDER BY display_name')
+    res.json(r.recordset)
+  } catch (e) { next(e) }
+})
+
+// User accounts: every verb admin-only
+api.use('/users', requireAdmin, users)
+
+// All entities below are admin-managed reference data: reads for any signed-in
+// user, writes admin-only.
+api.use(adminWrites)
 
 // ---------- sites ----------
 api.use('/sites', makeCrudRouter({
@@ -304,7 +330,10 @@ api.get('/stats', async (_req, res, next) => {
         (SELECT COUNT(*) FROM dbo.constituents) AS constituents,
         (SELECT COUNT(*) FROM dbo.war_rooms) AS war_rooms,
         (SELECT COUNT(*) FROM dbo.content_pages) AS content_pages,
-        (SELECT COUNT(*) FROM dbo.resources) AS resources`)
+        (SELECT COUNT(*) FROM dbo.resources) AS resources,
+        (SELECT COUNT(*) FROM dbo.incidents) AS incidents,
+        (SELECT COUNT(*) FROM dbo.incidents WHERE status = 'active') AS active_incidents,
+        (SELECT COUNT(*) FROM dbo.users) AS users`)
     res.json(r.recordset[0])
   } catch (e) { next(e) }
 })
