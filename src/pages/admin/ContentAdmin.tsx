@@ -106,22 +106,31 @@ export function ContentAdmin() {
       {(pages ?? []).length === 0 ? (
         <EmptyState title="No content pages yet" hint='Use "+ New page", or run the content seed.' />
       ) : (
-        <ul className="grid gap-2 sm:grid-cols-2">
-          {(pages ?? []).map((p) => (
-            <li key={p.page_id}>
-              <Link
-                to={`/admin/content/${p.slug}`}
-                className="flex min-h-14 flex-col justify-center rounded-xl border border-line bg-card px-4 py-3 hover:border-ink"
-              >
-                <span className="font-bold">{p.title}</span>
-                <span className="text-sm text-steel">
-                  {p.kind}
-                  {p.book ? ` · ${p.book}` : ''} · /{p.slug}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        // Guides and checklists are separate sections, each under its own heading
+        ([['guide', 'Guides'], ['checklist', 'Checklists'], ['static', 'Static pages']] as const).map(([kind, label]) => {
+          const group = (pages ?? []).filter((p) => p.kind === kind)
+          if (group.length === 0) return null
+          return (
+            <section key={kind} className="mb-6">
+              <h2 className="mb-2 text-xs font-bold tracking-[0.14em] text-steel uppercase">{label}</h2>
+              <ul className="grid gap-2 sm:grid-cols-2">
+                {group.map((p) => (
+                  <li key={p.page_id}>
+                    <Link
+                      to={`/admin/content/${p.slug}`}
+                      className="flex min-h-14 flex-col justify-center rounded-xl border border-line bg-card px-4 py-3 hover:border-ink"
+                    >
+                      <span className="font-bold">{p.title}</span>
+                      <span className="text-sm text-steel">
+                        {p.book ? `${p.book} · ` : ''}/{p.slug}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        })
       )}
     </div>
   )

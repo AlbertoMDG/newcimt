@@ -5,7 +5,7 @@
 2. Alertas por email con targeting dinámico desde la DB (sitio × función × nivel), con modo simulación
 3. Acknowledgment tracking: link de confirmación + panel en vivo de quién respondió
 4. Escalación automática al Alternate si el Primary no confirma en X minutos
-5. Botón "Unirse al war room": marca conferencia con código incluido (tel:+número,,código#)
+5. Botón "Unirse al workspace": marca conferencia con código incluido (tel:+número,,código#)
 6. Historial de alertas ligado a incidente (para debrief)
 7. CIMT como fuente de verdad → sincronizar listas/grupos hacia OnSolve (CSV o API)
 8. Integración con API de OnSolve para disparar SMS/voz reales (requiere credenciales del contrato)
@@ -17,7 +17,7 @@
 - Modo incidente activo: banner global, event log con timestamps, checklist ligado, resumen de debrief
 - PDF por sitio generado al vuelo (reemplaza los PDFs manuales de cimtPDF)
 - Búsqueda global (Ctrl+K) de personas/sitios/agencias
-- Código QR por sitio para póster del war room
+- Código QR por sitio para póster del workspace
 - Tarjeta de ruta de escalación por sitio (Coordinator → Alternate → Corporate)
 - PWA/offline: contactos cacheados sin señal
 - Import del Excel de MS Forms desde el admin con reporte en pantalla
@@ -28,6 +28,6 @@
 - Azure Entra SSO + roles (esperando definición del departamento dueño)
 - i18n (chino/alemán; `locale` ya existe en content_pages, strings centralizables)
 - Subida de archivos para recursos desde el admin (hoy: public/files/)
-- Migración de datos reales desde DB legacy `netlication` (osisql01): agencias externas, clientes, constituyentes, war rooms
+- Migración de datos reales desde DB legacy `netlication` (osisql01): agencias externas, clientes, constituyentes, workspaces (tabla `war_rooms`)
 - Deployment (IIS interno / servidor Node) + pipeline
 - Code-splitting del bundle (~544 KB)

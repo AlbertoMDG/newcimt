@@ -3,7 +3,7 @@ import { UserMenu } from '../../components/Layout'
 
 const entityNav = [
   { to: '/admin', label: 'Dashboard', end: true },
-  { to: '/admin/incidents', label: 'Incidents · War rooms' },
+  { to: '/admin/incidents', label: 'Incidents · Workspaces' },
   { to: '/admin/users', label: 'Users' },
   { to: '/admin/sites', label: 'Sites' },
   { to: '/admin/contacts', label: 'Contacts' },
@@ -14,7 +14,7 @@ const entityNav = [
   { to: '/admin/customer-contacts', label: 'Customer contacts' },
   { to: '/admin/constituents', label: 'Constituents' },
   { to: '/admin/constituent-contacts', label: 'Constituent contacts' },
-  { to: '/admin/war-rooms', label: 'Physical war rooms' },
+  { to: '/admin/workspaces', label: 'Physical workspaces' },
   { to: '/admin/resources', label: 'Resources' },
   { to: '/admin/content', label: 'Guides & checklists' },
 ]

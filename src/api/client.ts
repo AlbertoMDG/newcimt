@@ -4,7 +4,7 @@ import type {
   ContentPage, ContentSection, ContentTree, Customer, CustomerContact, DirectoryUser,
   ExternalAgencyContact, Incident, IncidentAuditEntry, IncidentFile, IncidentFolder,
   IncidentMember, IncidentMessage, InternalBookRow, ResourceItem, SessionUser, Site,
-  Stats, WarRoom,
+  Stats, Workspace,
 } from '@shared/types'
 
 export async function api<T>(path: string, init?: RequestInit): Promise<T> {
@@ -109,8 +109,8 @@ export const useConstituentContacts = () =>
     queryFn: () => api<ConstituentContact[]>('/constituent-contacts'),
   })
 
-export const useWarRooms = () =>
-  useQuery({ queryKey: ['war-rooms'], queryFn: () => api<WarRoom[]>('/war-rooms') })
+export const useWorkspaces = () =>
+  useQuery({ queryKey: ['workspaces'], queryFn: () => api<Workspace[]>('/workspaces') })
 
 export const useContentPages = (filters?: { book?: string; kind?: string }) =>
   useQuery({
@@ -145,7 +145,7 @@ export const useResources = () =>
 export const useStats = () =>
   useQuery({ queryKey: ['stats'], queryFn: () => api<Stats>('/stats') })
 
-// ---------- digital war rooms (incidents) ----------
+// ---------- incident workspaces ----------
 
 export const useIncidents = () =>
   useQuery({

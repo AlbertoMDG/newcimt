@@ -15,7 +15,7 @@ interface TimelineItem {
 }
 
 const AUDIT_LABELS: Record<string, { icon: string; label: string }> = {
-  incident_created: { icon: '⚑', label: 'War room opened' },
+  incident_created: { icon: '⚑', label: 'Workspace opened' },
   incident_updated: { icon: '✎', label: 'Details updated' },
   status_changed: { icon: '⟳', label: 'Status changed' },
   member_added: { icon: '+', label: 'Member added' },

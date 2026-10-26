@@ -255,8 +255,8 @@ BEGIN
 END
 GO
 
--- Digital war rooms. One row per formal incident; "war room" is only the UI label
--- (dbo.war_rooms above is the physical-rooms directory, a different thing).
+-- Incident workspaces. One row per formal incident; "workspace" is only the UI label
+-- (dbo.war_rooms above is the physical-rooms directory — legacy table name — a different thing).
 IF OBJECT_ID('dbo.incidents', 'U') IS NULL
 BEGIN
   CREATE TABLE dbo.incidents (
@@ -295,7 +295,7 @@ BEGIN
 END
 GO
 
--- War-room chat. Immutable by design (no edited_at/deleted_at — legal record).
+-- Workspace chat. Immutable by design (no edited_at/deleted_at — legal record).
 -- Message bodies are encrypted at rest with the incident's data key (AES-256-GCM).
 -- kind: 'chat' = conversation; 'event'/'decision' = formal coordinator entries
 -- (feed the timeline); 'system' = server-generated ("X was added").
@@ -316,7 +316,7 @@ BEGIN
 END
 GO
 
--- War-room folder tree. parent_folder_id is a self-reference (no cascade —
+-- Workspace folder tree. parent_folder_id is a self-reference (no cascade —
 -- SQL Server doesn't allow it); folders with content are never deleted.
 IF OBJECT_ID('dbo.incident_folders', 'U') IS NULL
 BEGIN
@@ -332,7 +332,7 @@ BEGIN
 END
 GO
 
--- War-room documents. The blob lives on disk (CIMT_FILES_DIR), encrypted with
+-- Workspace documents. The blob lives on disk (CIMT_FILES_DIR), encrypted with
 -- the incident's data key; this row is the metadata + chain-of-custody hash.
 -- Soft delete only: the blob and the row are never physically removed.
 IF OBJECT_ID('dbo.incident_files', 'U') IS NULL

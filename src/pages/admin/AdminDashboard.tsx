@@ -18,19 +18,19 @@ const tiles: { key: keyof StatsShape; label: string; to: string }[] = [
   { key: 'external_contacts', label: 'External agencies', to: '/admin/external' },
   { key: 'customers', label: 'Customers', to: '/admin/customers' },
   { key: 'constituents', label: 'Constituents', to: '/admin/constituents' },
-  { key: 'war_rooms', label: 'War rooms', to: '/admin/war-rooms' },
+  { key: 'war_rooms', label: 'Workspaces', to: '/admin/workspaces' },
   { key: 'content_pages', label: 'Guides & checklists', to: '/admin/content' },
   { key: 'resources', label: 'Resources', to: '/admin/resources' },
 ]
 
 const quickActions = [
-  { to: '/admin/incidents', label: 'Open a war room' },
+  { to: '/admin/incidents', label: 'Open a workspace' },
   { to: '/admin/users', label: 'Add a user' },
   { to: '/admin/contacts', label: 'Add a contact' },
   { to: '/admin/assignments', label: 'Assign a CIMT role' },
   { to: '/admin/external', label: 'Add an agency or hotline' },
   { to: '/admin/content', label: 'Edit a guide' },
-  { to: '/admin/war-rooms', label: 'Update a war room' },
+  { to: '/admin/workspaces', label: 'Update a workspace' },
 ]
 
 export function AdminDashboard() {

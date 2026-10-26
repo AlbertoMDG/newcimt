@@ -16,10 +16,10 @@ export function IncidentList() {
 
   return (
     <div>
-      <PageHeader eyebrow="Incidents" title="War rooms" />
+      <PageHeader eyebrow="Incidents" title="Workspaces" />
       {(incidents ?? []).length === 0 ? (
         <EmptyState
-          title="You are not in any war room"
+          title="You are not in any workspace"
           hint={me?.is_admin
             ? 'Open one from the admin panel when an incident starts.'
             : 'When an incident involves you, a coordinator will add you and it will appear here.'}

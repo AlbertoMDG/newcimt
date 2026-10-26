@@ -215,8 +215,8 @@ api.use('/constituent-contacts', makeCrudRouter({
   }),
 }))
 
-// ---------- war rooms ----------
-api.use('/war-rooms', makeCrudRouter({
+// ---------- workspaces (legacy dbo.war_rooms table) ----------
+api.use('/workspaces', makeCrudRouter({
   table: 'dbo.war_rooms',
   idColumn: 'war_room_id',
   orderBy: 'war_room_id',

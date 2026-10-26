@@ -1,8 +1,8 @@
-# Cifrado del War Room — guía operativa
+# Cifrado del Workspace — guía operativa
 
 ## Cómo funciona
 
-- Cada incidente (war room) tiene su propia **data key** AES-256, generada al crearlo.
+- Cada incidente (workspace) tiene su propia **data key** AES-256, generada al crearlo.
 - Los mensajes del chat y los documentos se cifran con esa data key (**AES-256-GCM**, con AAD que ata cada ciphertext a su incidente y tabla — un ciphertext no puede "trasplantarse" a otro incidente).
 - La data key se guarda en `dbo.incidents.data_key` **envuelta** (cifrada) por la **master key** `CIMT_MASTER_KEY` del `.env`. El texto plano de mensajes y archivos nunca toca la base de datos ni el disco.
 - Los blobs de documentos viven cifrados en `CIMT_FILES_DIR` (default `server/private-files/`), con nombre UUID — el nombre original solo existe en la base de datos.

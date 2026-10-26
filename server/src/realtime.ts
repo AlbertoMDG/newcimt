@@ -1,4 +1,4 @@
-// SSE hub for war-room live updates. In-memory by design: single-process app
+// SSE hub for workspace live updates. In-memory by design: single-process app
 // (documented limitation — scaling out would need a message bus).
 import type { Request, Response } from 'express'
 

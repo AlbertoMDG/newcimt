@@ -1,4 +1,4 @@
-// Admin screen for digital war rooms: create incidents, drive the lifecycle
+// Admin screen for incident workspaces: create incidents, drive the lifecycle
 // (close / archive / reopen), and manage members + roles. Custom page — the
 // lifecycle and member panel don't fit the generic EntityAdmin.
 import { useState } from 'react'
@@ -53,7 +53,7 @@ function CreateModal({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/50 sm:items-center" role="dialog" aria-modal>
       <div className="max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-paper p-5 sm:rounded-2xl">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-extrabold">Open a war room</h2>
+          <h2 className="text-lg font-extrabold">Open a workspace</h2>
           <button type="button" onClick={onClose} className="min-h-11 px-3 text-xl text-steel" aria-label="Close">✕</button>
         </div>
         <form onSubmit={submit} className="space-y-3">
@@ -96,7 +96,7 @@ function CreateModal({ onClose }: { onClose: () => void }) {
               disabled={mutation.isPending}
               className="min-h-12 flex-1 rounded-full bg-accent font-bold text-white hover:bg-accent-deep disabled:opacity-50"
             >
-              {mutation.isPending ? 'Opening…' : 'Open war room'}
+              {mutation.isPending ? 'Opening…' : 'Open workspace'}
             </button>
             <button type="button" onClick={onClose} className="min-h-12 rounded-full bg-mist px-6 font-semibold">Cancel</button>
           </div>
@@ -152,7 +152,7 @@ function MembersPanel({ incident }: { incident: Incident }) {
           </button>
         </div>
       ) : (
-        <p className="mb-3 text-sm text-steel">This war room is {incident.status} — membership is frozen.</p>
+        <p className="mb-3 text-sm text-steel">This workspace is {incident.status} — membership is frozen.</p>
       )}
 
       {mutation.isError ? (
@@ -181,7 +181,7 @@ function MembersPanel({ incident }: { incident: Incident }) {
                 <button
                   type="button"
                   onClick={() => {
-                    if (confirm(`Remove ${m.display_name} from this war room?`)) {
+                    if (confirm(`Remove ${m.display_name} from this workspace?`)) {
                       mutation.mutate({ path: `${base}/${m.member_id}`, method: 'DELETE' })
                     }
                   }}
@@ -284,24 +284,24 @@ function LifecycleButtons({ incident }: { incident: Incident }) {
       {incident.status === 'active' ? (
         <button
           type="button"
-          onClick={() => act('close', 'Close this war room? It becomes read-only (an admin can reopen it).')}
+          onClick={() => act('close', 'Close this workspace? It becomes read-only (an admin can reopen it).')}
           className="min-h-11 rounded-full bg-ink px-5 text-sm font-bold text-white"
         >
-          Close war room
+          Close workspace
         </button>
       ) : null}
       {incident.status === 'closed' ? (
         <>
           <button
             type="button"
-            onClick={() => act('reopen', 'Reopen this war room? The action is recorded in the audit trail.')}
+            onClick={() => act('reopen', 'Reopen this workspace? The action is recorded in the audit trail.')}
             className="min-h-11 rounded-full bg-accent px-5 text-sm font-bold text-white"
           >
             Reopen
           </button>
           <button
             type="button"
-            onClick={() => act('archive', 'Archive this war room? It stays read-only and leaves the active lists.')}
+            onClick={() => act('archive', 'Archive this workspace? It stays read-only and leaves the active lists.')}
             className="min-h-11 rounded-full bg-mist px-5 text-sm font-bold"
           >
             Archive
@@ -311,7 +311,7 @@ function LifecycleButtons({ incident }: { incident: Incident }) {
       {incident.status === 'archived' ? (
         <button
           type="button"
-          onClick={() => act('reopen', 'Reopen this archived war room? The action is recorded in the audit trail.')}
+          onClick={() => act('reopen', 'Reopen this archived workspace? The action is recorded in the audit trail.')}
           className="min-h-11 rounded-full bg-accent px-5 text-sm font-bold text-white"
         >
           Reopen
@@ -343,21 +343,21 @@ export function IncidentsAdmin() {
     <div>
       <PageHeader
         eyebrow="Incidents"
-        title="War rooms"
+        title="Workspaces"
         action={
           <button
             type="button"
             onClick={() => setCreating(true)}
             className="min-h-12 rounded-full bg-emergency px-5 font-bold text-white hover:bg-emergency-deep"
           >
-            + Open war room
+            + Open workspace
           </button>
         }
       />
 
       {(incidents ?? []).length === 0 ? (
         <EmptyState
-          title="No war rooms yet"
+          title="No workspaces yet"
           hint="Open one when an incident starts; add the responders as members."
         />
       ) : (
@@ -416,7 +416,7 @@ export function IncidentsAdmin() {
                 to={`/incidents/${selected.incident_id}`}
                 className="min-h-11 rounded-full bg-accent px-5 text-sm font-bold text-white hover:bg-accent-deep inline-flex items-center"
               >
-                Enter war room ›
+                Enter workspace ›
               </Link>
             </span>
           </div>

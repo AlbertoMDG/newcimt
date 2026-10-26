@@ -1,4 +1,4 @@
-// War-room documents: folder tree + encrypted uploads/downloads. Blobs are
+// Workspace documents: folder tree + encrypted uploads/downloads. Blobs are
 // encrypted on the server; downloads go through the membership-checked endpoint
 // (the session cookie rides along on the plain <a href>).
 import { useRef, useState } from 'react'

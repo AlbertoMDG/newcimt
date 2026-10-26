@@ -2,6 +2,7 @@ import Markdown from 'react-markdown'
 import { useParams } from 'react-router'
 import { useContentTree } from '../api/client'
 import { Accordion, EmptyState, ErrorNote, Loading, PageHeader } from '../components/ui'
+import { TOPIC_COLORS } from '../components/topicColors'
 
 export function GuidePage() {
   const { slug = '' } = useParams()
@@ -23,8 +24,11 @@ export function GuidePage() {
   }
   if (!page) return <ErrorNote error={new Error('Not found')} />
 
+  const topic = TOPIC_COLORS[slug]
+
   return (
     <div>
+      {topic ? <div aria-hidden className={`mb-3 h-1.5 w-20 rounded-full ${topic.dot}`} /> : null}
       <PageHeader eyebrow="Response guide" title={page.title} />
       <div>
         {page.sections.map((s, i) => (

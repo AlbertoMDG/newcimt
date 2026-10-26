@@ -1,4 +1,4 @@
-// Live war-room updates over SSE. EventSource sends the session cookie
+// Live workspace updates over SSE. EventSource sends the session cookie
 // automatically and reconnects on its own; on every (re)connect we refetch the
 // message history so nothing is missed while disconnected.
 import { useEffect, useState } from 'react'

@@ -1,5 +1,6 @@
 import { useResources } from '../api/client'
 import { Card, EmptyState, ErrorNote, Loading, PageHeader } from '../components/ui'
+import { topicColorForTitle } from '../components/topicColors'
 
 export function FormsPage() {
   const { data: resources, isPending, error } = useResources()
@@ -16,8 +17,9 @@ export function FormsPage() {
         <div className="grid gap-3 sm:grid-cols-2">
           {(resources ?? []).map((r) => {
             const href = r.url ?? (r.file_name ? `/files/${r.file_name}` : null)
+            const topic = topicColorForTitle(r.title)
             return (
-              <Card key={r.resource_id}>
+              <Card key={r.resource_id} className={topic ? `border-l-8 ${topic.border}` : undefined}>
                 {r.category ? (
                   <p className="text-xs font-bold tracking-[0.12em] text-steel uppercase">
                     {r.category}

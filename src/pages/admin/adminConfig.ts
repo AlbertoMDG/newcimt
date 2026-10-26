@@ -259,11 +259,11 @@ export const entities: Record<string, EntityConfig> = {
       { name: 'email', label: 'Email' },
     ],
   },
-  'war-rooms': {
-    title: 'War rooms (Schedule 1A)',
-    endpoint: '/war-rooms',
+  workspaces: {
+    title: 'Workspaces (Schedule 1A)',
+    endpoint: '/workspaces',
     idKey: 'war_room_id',
-    invalidates: ['war-rooms', 'stats'],
+    invalidates: ['workspaces', 'stats'],
     columns: [
       { key: 'site_id', label: 'Site', lookup: 'sites' },
       { key: 'war_room_location', label: 'Location' },
@@ -272,8 +272,8 @@ export const entities: Record<string, EntityConfig> = {
     searchKeys: ['war_room_location'],
     fields: [
       { name: 'site_id', label: 'Site', type: 'select', optionSource: 'sites', required: true },
-      { name: 'war_room_location', label: 'War room location', type: 'textarea' },
-      { name: 'war_room_phone', label: 'War room phone' },
+      { name: 'war_room_location', label: 'Workspace location', type: 'textarea' },
+      { name: 'war_room_phone', label: 'Workspace phone' },
       { name: 'direct_line', label: 'Direct line' },
       { name: 'direct_fax', label: 'Direct fax' },
       { name: 'conference_phone', label: 'Conference phone' },

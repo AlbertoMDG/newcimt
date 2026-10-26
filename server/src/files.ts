@@ -1,4 +1,4 @@
-// Encrypted blob storage for war-room documents. Blobs live OUTSIDE the web
+// Encrypted blob storage for workspace documents. Blobs live OUTSIDE the web
 // root (never served statically), named by server-generated UUID — the original
 // filename only exists in dbo.incident_files.
 import { mkdir, readFile, writeFile } from 'node:fs/promises'

@@ -6,7 +6,7 @@ const books = [
   { to: '/contacts/external', title: 'External agencies', hint: 'OSHA, FDA, USDA, SERC, LEPC and national hotlines' },
   { to: '/contacts/customers', title: 'Customers', hint: 'OSI and customer-side crisis contacts' },
   { to: '/contacts/constituents', title: 'Constituents', hint: 'Police, fire, hospitals and utilities near each site' },
-  { to: '/contacts/war-rooms', title: 'War rooms · Schedule 1A', hint: 'Assembly rooms, direct lines and conference bridges' },
+  { to: '/contacts/workspaces', title: 'Workspaces · Schedule 1A', hint: 'Assembly rooms, direct lines and conference bridges' },
 ]
 
 export function ContactsHub() {

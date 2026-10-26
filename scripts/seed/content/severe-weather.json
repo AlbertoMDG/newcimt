@@ -1,0 +1,44 @@
+{
+  "slug": "severe-weather",
+  "kind": "guide",
+  "book": "severe-weather",
+  "title": "Severe Weather & Natural Disasters",
+  "sections": [
+    {
+      "heading": "Tornado Evacuation",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Upon supervisory notification of a tornado warning or hearing the Tornado Alarm, all employees will immediately evacuate to the designated holding areas.\n2. Employees shall follow emergency shut down procedures prior to evacuating.\n3. Supervisors shall check their work areas (if safely possible) before seeking shelter to ensure that all persons have received the warning notice and have evacuated to the designated holding area. NO OUTSIDE SEARCHES WILL BE MADE.\n4. Headcount Coordinators will account for all persons at the designated holding areas and report this information to the Emergency Coordinator.\n5. Security or alternate assigned personnel will monitor the weather conditions with the working battery-operated Emergency Weather Radio.\n6. When the Tornado Warning is cancelled or downgraded, the Emergency Coordinator will determine if continued weather monitoring is advisable and take the appropriate steps as necessary.\n7. All persons shall remain in the protective shelter until the Tornado Warning Notice has been terminated, conditions are safe and they are instructed to return to their work areas or to leave the building.\n8. As soon as conditions permit, the General Manager or Emergency Coordinator shall have the work area inspected for damage.\n9. If there is no damage to the property, production may resume immediately after the General Manager, or the Emergency Coordinator has determined it is safe. If direct damages or injuries have occurred, the General Manager or Emergency Coordinator shall inspect the premises to assure operations can safely resume."
+        }
+      ]
+    },
+    {
+      "heading": "Hurricane",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "During Hurricane:\n\nPost Hurricane:"
+        }
+      ]
+    },
+    {
+      "heading": "Emergency Procedures for Severe Weather",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. In the event that severe weather approaches, the General Manager or Emergency Coordinator shall notify supervisors to have all personnel evacuate to an inside protective shelter.\n2. The supervisors shall notify all affected employees to calmly evacuate to the inside protective shelter (this area may be the employee's assigned inside work area or another are inside the facility).\n3. The inside protected area will be designated by the Emergency Coordinator at the time of the warning.\n4. Employees should follow emergency shut down procedures prior to evacuating.\n5. Supervisors should check their work areas (if safely possible) before seeking shelter to ensure that all persons have received the warning notice and gone to their designated locations.\n6. Headcount Coordinators will account for all persons at the designated locations and report this information to the Emergency Coordinator.\n7. Security will monitor the weather conditions with a working battery-operated Emergency Weather Radio.\n8. When the severe weather warning is cancelled or downgraded, the Emergency Coordinator will determine if continued weather monitoring is advisable and take the appropriate steps as necessary.\n9. All persons shall remain in their designated locations until the severe weather warning notice has been terminated, conditions are safe and they are instructed to return to their work areas or leave the building.\n10. As soon as conditions permit, the Emergency Coordinator shall have the work area inspected for damage.\n11. If there is no damage to the property, production may resume immediately after the Emergency Coordinator has determined it is safe. If direct damages or injuries have occurred, the Emergency Coordinator shall inspect the premises to assure operations can safely resume."
+        }
+      ]
+    },
+    {
+      "heading": "Flood and Water Damage",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. If a water leak occurs call the Fire Department.\n2. Advise the dispatcher of the location and severity of the leak.\n3. If there are electrical appliances or electrical outlets near the leak, use extreme caution. If there is any possible danger from electricity, evacuate the area.\n4. When moving through wet or flooded areas use caution to avoid slipping."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "emergency-response",
+  "kind": "guide",
+  "book": "emergency-response",
+  "title": "Emergency Response",
+  "sections": [
+    {
+      "heading": "Fire Evacuation",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. Evacuate the building immediately at the sound of an alarm. Evacuation should be made via the nearest safe exit.\n2. Once you have exited the building, stay out. Under no circumstance are you allowed to re-enter a building that is in alarm. Re-entry can only be made after an \"all-clear\" signal is given by the Fire Department.\n3. If conditions permit, close all doors as you leave in order to help contain the fire and smoke.\n4. If you have to exit through smoke, crawl low to your exit keeping your head one or two feet above the floor, where the air will be cleanest.\n5. Test doorknobs and spaces around the door with the back of your hand. If the door is warm, try another escape route. If it's cool, open it slowly. Slam it shut if smoke pours through.\n6. Use the stairs; never use an elevator during a fire.\n7. If you are trapped, call 911 and tell them your location."
+        }
+      ]
+    },
+    {
+      "heading": "Explosion",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "*Signs of an explosion may be a very loud noise or series of noises and vibrations, fire, heat or smoke, falling glass or debris, or building damage. If you suspect that an explosion has occurred:*\n\n1. Immediately evacuate the building as quickly and calmly as possible.\n2. Activate the nearest alarm pull station as you exit.\n\n*In the event of fire or smoke, refer to the Fire Evacuation procedures.*"
+        }
+      ]
+    },
+    {
+      "heading": "Medical Emergencies",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "Minor:\n\nMajor:\n\nFatality or Hospitalization:"
+        }
+      ]
+    },
+    {
+      "heading": "Utility Emergencies",
+      "blocks": [
+        {
+          "kind": "markdown",
+          "body": "1. The General Manager or Emergency Coordinator will determine the extent of the utility emergency and contact the appropriate repair and emergency response personnel.\n2. Situations of an isolated nature (i.e., power outage or water main break) that can be resolved quickly and safely may only require a partial evacuation or temporary shutdown of operations.\n3. If an evacuation is necessary, the fire alarm will sound to notify persons in the building to leave through the closest exit that is accessible in a calm, orderly manner.\n4. The Emergency Coordinator shall ensure that the Fire Department has been notified.\n5. For gas leaks, electrical power failure, or water main breaks, the maintenance department shall determine the extent of the leak, failure, or break and notify the Emergency Coordinator. The Emergency Coordinator shall notify the service provider to facilitate repairs as needed.\n6. It may be necessary to shut down other utility lines or systems that might present a hazard. If necessary, coordinate with maintenance personnel, utility companies, and the fire department if additional lines or systems need to be shut down.\n7. As conditions permit, inspect the site for damage or other problems and provide reentry recommendations. Provide Emergency repair services as necessary and appropriate.\n8. Recall evacuated employees when it is safe to do so."
+        }
+      ]
+    }
+  ]
+}

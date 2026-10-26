@@ -3,7 +3,7 @@ import { PageHeader } from '../components/ui'
 const steps = [
   { title: 'Coordinator is notified', detail: 'Any employee who becomes aware of a critical incident notifies the Site Coordinator.' },
   { title: 'Team is alerted', detail: 'The Site Coordinator alerts the CIMT via the mass-notification system.' },
-  { title: 'Team assembles', detail: 'Members assemble in the war room (see Schedule 1A) or join the conference bridge.' },
+  { title: 'Team assembles', detail: 'Members assemble in the workspace (see Schedule 1A) or join the conference bridge.' },
   { title: 'Initial briefing', detail: 'The Coordinator briefs the team on what is known so far.' },
   { title: 'Gather the facts', detail: 'Confirm what happened before acting on assumptions.' },
   { title: "Answer the 5 W's & H", detail: 'Who, what, when, where, why and how — documented as facts are confirmed.' },

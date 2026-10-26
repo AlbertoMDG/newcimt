@@ -1,6 +1,6 @@
 # SSO con Azure Entra ID — configuración y pruebas
 
-La app usa OIDC (authorization code + PKCE) vía `openid-client`. El SSO **solo cambia cómo se crea la sesión**: usuarios, membresías de war rooms, chat, archivos y auditoría no saben de dónde vino el login.
+La app usa OIDC (authorization code + PKCE) vía `openid-client`. El SSO **solo cambia cómo se crea la sesión**: usuarios, membresías de workspaces, chat, archivos y auditoría no saben de dónde vino el login.
 
 ## Cómo se vinculan los usuarios
 

@@ -16,7 +16,7 @@ import { InternalContacts, InternalSite } from './pages/InternalContacts'
 import { ExternalContacts } from './pages/ExternalContacts'
 import { CustomersPage } from './pages/CustomersPage'
 import { ConstituentsPage } from './pages/ConstituentsPage'
-import { WarRoomsPage } from './pages/WarRoomsPage'
+import { WorkspacesPage } from './pages/WorkspacesPage'
 import { IncidentList } from './pages/incidents/IncidentList'
 import { IncidentRoom } from './pages/incidents/IncidentRoom'
 import { AdminLayout } from './pages/admin/AdminLayout'
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
           { path: '/contacts/external', element: <ExternalContacts /> },
           { path: '/contacts/customers', element: <CustomersPage /> },
           { path: '/contacts/constituents', element: <ConstituentsPage /> },
-          { path: '/contacts/war-rooms', element: <WarRoomsPage /> },
+          { path: '/contacts/workspaces', element: <WorkspacesPage /> },
           { path: '/incidents', element: <IncidentList /> },
           { path: '/incidents/:id', element: <IncidentRoom /> },
         ],

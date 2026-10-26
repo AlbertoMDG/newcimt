@@ -34,6 +34,13 @@
 
   --shadow-card: 0 1px 2px rgba(23, 25, 28, 0.04), 0 8px 24px -12px rgba(23, 25, 28, 0.12);
   --shadow-float: 0 24px 60px -20px rgba(23, 25, 28, 0.3);
+
+  /* Topic (binder tab) colors — each response topic keeps its legacy binder color */
+  --color-topic-workplace: #ce0e2d; /* Workplace Violence: red */
+  --color-topic-chemical: #17191c;  /* Chemical: black */
+  --color-topic-food: #1d7a3d;      /* Food: green */
+  --color-topic-media: #2e5c8a;     /* Media: blue */
+  --color-topic-roles: #e9b400;     /* Roles & Responsibilities: yellow */
 }
 
 html {
@@ -57,6 +64,21 @@ body {
     var(--color-emergency) 0 16px,
     var(--color-ink) 16px 32px
   );
+}
+
+/* Guide prose: "####" markdown headings mark each hazard/subtopic inside a
+   section (e.g. each infection in the Food guide) — bold, underlined, accent
+   color so they stand out from the detail labels below them. */
+.prose-cimt h4 {
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-cimt h4:first-child {
+  margin-top: 0;
 }
 
 /* Phone numbers & codes: tabular digits, always legible */

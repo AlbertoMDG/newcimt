@@ -28,5 +28,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# Encrypted war-room documents (never in git, never under the web root)
+# Encrypted workspace documents (never in git, never under the web root)
 server/private-files/

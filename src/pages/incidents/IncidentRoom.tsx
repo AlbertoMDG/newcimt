@@ -1,4 +1,4 @@
-// A single digital war room: live chat, documents, timeline, and members.
+// A single incident workspace: live chat, documents, timeline, and members.
 import { useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { downloadIncidentExport, useIncident, useIncidentMembers, useMe, useSites } from '../../api/client'
@@ -65,7 +65,7 @@ export function IncidentRoom() {
       ) : null}
 
       <PageHeader
-        eyebrow="War room"
+        eyebrow="Workspace"
         title={incident.title}
         action={
           <span className="flex flex-wrap items-center gap-2">
@@ -92,7 +92,7 @@ export function IncidentRoom() {
 
       {readOnly ? (
         <div className="mb-4 rounded-xl bg-mist p-3 text-sm font-semibold text-steel">
-          This war room is {incident.status} — everything is read-only.
+          This workspace is {incident.status} — everything is read-only.
           {incident.closed_at ? ` Closed ${fmtDate(incident.closed_at)}.` : ''}
         </div>
       ) : null}

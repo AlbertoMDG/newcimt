@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { PhoneLink } from '../components/ui'
+import { TOPIC_COLORS } from '../components/topicColors'
 
 const priorities = [
   'Protect human life',
@@ -9,7 +10,9 @@ const priorities = [
 ]
 
 const books = [
-  { slug: 'workplace-violence', title: 'Workplace Violence', hint: 'Threats, intruders, evacuation, severe weather' },
+  { slug: 'workplace-violence', title: 'Workplace Violence and Security', hint: 'Bomb threats, civil disturbance, hostile intruders' },
+  { slug: 'severe-weather', title: 'Severe Weather & Natural Disasters', hint: 'Tornado, hurricane, severe weather, flood' },
+  { slug: 'emergency-response', title: 'Emergency Response', hint: 'Fire, explosion, medical and utility emergencies' },
   { slug: 'chemical', title: 'Chemical', hint: 'Ammonia, natural gas, solvents, chlorine' },
   { slug: 'food', title: 'Food', hint: 'Biological, physical and chemical hazards' },
   { slug: 'media', title: 'Media', hint: 'Press and communication guidance' },
@@ -65,7 +68,9 @@ export function Home() {
             <Link
               key={b.slug}
               to={`/guides/${b.slug}`}
-              className="group rounded-2xl bg-card p-4 shadow-card hover:ring-2 hover:ring-accent"
+              className={`group rounded-2xl border-l-8 bg-card p-4 shadow-card hover:ring-2 hover:ring-accent ${
+                TOPIC_COLORS[b.slug]?.border ?? 'border-line'
+              }`}
             >
               <p className="text-lg font-bold group-hover:text-accent">{b.title}</p>
               <p className="mt-1 text-sm text-steel">{b.hint}</p>

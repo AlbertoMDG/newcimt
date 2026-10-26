@@ -1,8 +1,8 @@
-import { useSites, useWarRooms } from '../api/client'
+import { useSites, useWorkspaces } from '../api/client'
 import { Card, EmptyState, ErrorNote, Loading, PageHeader, Pagination, PhoneLink, usePagination } from '../components/ui'
 
-export function WarRoomsPage() {
-  const { data: rooms, isPending, error } = useWarRooms()
+export function WorkspacesPage() {
+  const { data: rooms, isPending, error } = useWorkspaces()
   const { data: sites } = useSites()
   const pager = usePagination(rooms ?? [])
 
@@ -13,9 +13,9 @@ export function WarRoomsPage() {
 
   return (
     <div>
-      <PageHeader eyebrow="Schedule 1A" title="War rooms" />
+      <PageHeader eyebrow="Schedule 1A" title="Workspaces" />
       {(rooms ?? []).length === 0 ? (
-        <EmptyState title="No war rooms on file yet" to="/admin/war-rooms" cta="Add in admin" />
+        <EmptyState title="No workspaces on file yet" to="/admin/workspaces" cta="Add in admin" />
       ) : (
         <>
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -26,7 +26,7 @@ export function WarRoomsPage() {
                 <p className="mt-1 text-sm">{r.war_room_location}</p>
               ) : null}
               <div className="mt-3 flex flex-wrap gap-2">
-                <PhoneLink number={r.war_room_phone} label="war room" />
+                <PhoneLink number={r.war_room_phone} label="workspace" />
                 <PhoneLink number={r.direct_line} label="direct" />
                 <PhoneLink number={r.conference_phone} label="bridge" />
               </div>

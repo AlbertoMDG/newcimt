@@ -132,7 +132,8 @@ export interface ConstituentContact {
   sort_order: number
 }
 
-export interface WarRoom {
+// Field names mirror the legacy dbo.war_rooms columns ("workspace" is the UI label).
+export interface Workspace {
   war_room_id: number
   site_id: number
   war_room_location: string | null
@@ -200,7 +201,7 @@ export interface Stats {
   users: number
 }
 
-// ---------- digital war rooms (incidents) ----------
+// ---------- incident workspaces ----------
 
 export type IncidentType =
   | 'food_safety' | 'workplace' | 'environmental' | 'security'

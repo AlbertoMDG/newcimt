@@ -1,4 +1,4 @@
-// Digital war rooms (incidents): lifecycle, membership, and member-gated access.
+// Incident workspaces: lifecycle, membership, and member-gated access.
 // Custom router — access control is per-incident membership, not admin CRUD.
 import { Router } from 'express'
 import type { NextFunction, Request, Response } from 'express'
@@ -76,7 +76,7 @@ function requireMember(minRole: IncidentRole) {
         if (!m) throw notFound()
         role = m.role
       }
-      if (ROLE_RANK[role] < ROLE_RANK[minRole]) throw forbidden('Your war-room role does not allow this')
+      if (ROLE_RANK[role] < ROLE_RANK[minRole]) throw forbidden('Your workspace role does not allow this')
       req.incident = inc
       req.incidentRole = role
       next()
@@ -87,7 +87,7 @@ function requireMember(minRole: IncidentRole) {
 /** Closed/archived rooms are read-only — the legal record is frozen. */
 function requireWritable(req: Request, _res: Response, next: NextFunction) {
   if (req.incident!.status !== 'active') {
-    return next(badRequest('This war room is closed and read-only'))
+    return next(badRequest('This workspace is closed and read-only'))
   }
   next()
 }
@@ -266,7 +266,7 @@ async function setStatus(req: Request, to: 'active' | 'closed' | 'archived') {
   await logAudit(req.incident!.incident_id, req.user!.user_id, 'status_changed',
     { from: req.incident!.status, to })
   const verb = to === 'active' ? 'reopened' : to
-  await postSystemMessage(req.incident!, req, `War room ${verb} by ${req.user!.display_name}`)
+  await postSystemMessage(req.incident!, req, `Workspace ${verb} by ${req.user!.display_name}`)
   broadcast(req.incident!.incident_id, 'incident', { incident_id: req.incident!.incident_id, status: to })
   const row = await pool.request().input('id', sql.Int, req.incident!.incident_id)
     .query(`SELECT ${INC_COLS} FROM dbo.incidents WHERE incident_id = @id`)
@@ -275,14 +275,14 @@ async function setStatus(req: Request, to: 'active' | 'closed' | 'archived') {
 
 incidents.post('/:id/close', requireMember('commander'), async (req, res, next) => {
   try {
-    if (req.incident!.status !== 'active') throw badRequest('Only an active war room can be closed')
+    if (req.incident!.status !== 'active') throw badRequest('Only an active workspace can be closed')
     res.json(await setStatus(req, 'closed'))
   } catch (e) { next(e) }
 })
 
 incidents.post('/:id/archive', requireAdmin, requireMember('commander'), async (req, res, next) => {
   try {
-    if (req.incident!.status !== 'closed') throw badRequest('Only a closed war room can be archived')
+    if (req.incident!.status !== 'closed') throw badRequest('Only a closed workspace can be archived')
     res.json(await setStatus(req, 'archived'))
   } catch (e) { next(e) }
 })
@@ -290,7 +290,7 @@ incidents.post('/:id/archive', requireAdmin, requireMember('commander'), async (
 // Reopen: admin-only, always audited (the record shows the room was reopened)
 incidents.post('/:id/reopen', requireAdmin, requireMember('commander'), async (req, res, next) => {
   try {
-    if (req.incident!.status === 'active') throw badRequest('This war room is already active')
+    if (req.incident!.status === 'active') throw badRequest('This workspace is already active')
     res.json(await setStatus(req, 'active'))
   } catch (e) { next(e) }
 })
@@ -390,7 +390,7 @@ incidents.get('/:id/audit', requireMember('commander'), async (req, res, next) =
 incidents.post('/:id/export', requireMember('commander'), async (req, res, next) => {
   try {
     if (req.incident!.status === 'active') {
-      throw badRequest('Close the war room before exporting its record')
+      throw badRequest('Close the workspace before exporting its record')
     }
     await logAudit(req.incident!.incident_id, req.user!.user_id, 'export_generated', {})
     await streamIncidentExport(req, res)
@@ -461,7 +461,7 @@ incidents.post('/:id/members', requireMember('commander'), requireWritable, asyn
                 VALUES (@incident_id, @user_id, @role, @added_by)`)
     } catch (err: unknown) {
       if (typeof err === 'object' && err && 'number' in err && (err as { number: number }).number === 2627) {
-        throw badRequest('That user is already a member of this war room')
+        throw badRequest('That user is already a member of this workspace')
       }
       throw err
     }

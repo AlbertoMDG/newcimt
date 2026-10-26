@@ -1,4 +1,4 @@
-// War-room chat: live via SSE, encrypted at rest on the server. Messages are
+// Workspace chat: live via SSE, encrypted at rest on the server. Messages are
 // immutable — no edit/delete — because the chat IS the legal record.
 import { useEffect, useRef, useState } from 'react'
 import type { Incident, IncidentMessage, MessageKind } from '@shared/types'
@@ -91,7 +91,7 @@ export function ChatPanel({ incident }: { incident: Incident }) {
   return (
     <div className="flex h-[65dvh] flex-col rounded-2xl border border-line bg-paper">
       <div className="flex items-center justify-between border-b border-line px-4 py-2 text-xs font-semibold text-steel">
-        <span>Encrypted war-room chat — everything here is part of the incident record</span>
+        <span>Encrypted workspace chat — everything here is part of the incident record</span>
         <span className={`inline-flex items-center gap-1.5 ${connected ? 'text-ok' : 'text-steel'}`}>
           <span className={`h-2 w-2 rounded-full ${connected ? 'bg-ok' : 'bg-line'}`} aria-hidden />
           {connected ? 'Live' : 'Reconnecting…'}
@@ -166,7 +166,7 @@ export function ChatPanel({ incident }: { incident: Incident }) {
         </div>
       ) : (
         <p className="border-t border-line p-3 text-center text-sm font-semibold text-steel">
-          {readOnly ? 'This war room is read-only.' : 'Observers can read but not post.'}
+          {readOnly ? 'This workspace is read-only.' : 'Observers can read but not post.'}
         </p>
       )}
     </div>

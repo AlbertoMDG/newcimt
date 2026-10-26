@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { useIncidents, useLogout, useMe } from '../api/client'
 import { Avatar } from './ui'
+import { TOPIC_COLORS } from './topicColors'
 
 /** Global banner while an incident the user can see is active. */
 function ActiveIncidentBanner() {
@@ -15,7 +16,7 @@ function ActiveIncidentBanner() {
       to={active.length === 1 ? `/incidents/${first.incident_id}` : '/incidents'}
       className="block bg-emergency px-4 py-2.5 text-center text-sm font-bold text-white hover:bg-emergency-deep"
     >
-      ⚑ Active incident{active.length > 1 ? `s (${active.length})` : `: ${first.title}`} — open war room ›
+      ⚑ Active incident{active.length > 1 ? `s (${active.length})` : `: ${first.title}`} — open workspace ›
     </Link>
   )
 }
@@ -42,7 +43,7 @@ export function UserMenu() {
 
 const navItems = [
   { to: '/', label: 'Home', icon: '⌂', end: true },
-  { to: '/incidents', label: 'War Room', icon: '⚑' },
+  { to: '/incidents', label: 'Workspace', icon: '⚑' },
   { to: '/contacts', label: 'Contacts', icon: '☎' },
   { to: '/checklist', label: 'Checklist', icon: '☑' },
   { to: '/flow', label: 'Flow', icon: '➔' },
@@ -127,16 +128,28 @@ export function Shell({ children }: { children?: ReactNode }) {
       <footer className="mt-8 hidden bg-ink text-white sm:block">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-5 text-sm">
           <p className="font-semibold">
-            OSI Group · CIMT
+            ©OSI Group, LLC. All Rights Reserved. · CIMT
             <span className="ml-2 font-normal text-white/60">
               Critical Incident Management Team
             </span>
           </p>
-          <div className="flex gap-4 text-white/80">
-            <Link to="/guides/workplace-violence" className="hover:text-white">Workplace Violence</Link>
-            <Link to="/guides/chemical" className="hover:text-white">Chemical</Link>
-            <Link to="/guides/food" className="hover:text-white">Food</Link>
-            <Link to="/guides/media" className="hover:text-white">Media</Link>
+          <div className="flex flex-wrap gap-4 text-white/80">
+            {([
+              ['workplace-violence', 'Workplace Violence and Security'],
+              ['severe-weather', 'Severe Weather'],
+              ['emergency-response', 'Emergency Response'],
+              ['chemical', 'Chemical'],
+              ['food', 'Food'],
+              ['media', 'Media'],
+            ] as const).map(([slug, label]) => (
+              <Link key={slug} to={`/guides/${slug}`} className="inline-flex items-center gap-1.5 hover:text-white">
+                {/* dot = binder tab color; ring keeps the black (Chemical) dot visible on the dark footer */}
+                {slug in TOPIC_COLORS ? (
+                  <span aria-hidden className={`h-2.5 w-2.5 rounded-full ring-1 ring-white/50 ${TOPIC_COLORS[slug].dot}`} />
+                ) : null}
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
       </footer>
