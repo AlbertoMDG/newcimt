@@ -30,3 +30,6 @@ dist-ssr
 
 # Encrypted workspace documents (never in git, never under the web root)
 server/private-files/
+
+# Generated data exports (may contain real contact data)
+exports/
