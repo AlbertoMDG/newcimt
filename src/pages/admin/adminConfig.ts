@@ -22,6 +22,17 @@ export interface ColumnSpec {
   lookup?: OptionSource
 }
 
+export interface FilterSpec {
+  key: string
+  label: string
+  /** fixed option list */
+  options?: { value: string; label: string }[]
+  /** FK filter: options come from this lookup source */
+  optionSource?: OptionSource
+  /** 'boolean' renders Yes/No; 'values' derives distinct values from the loaded rows */
+  kind?: 'boolean' | 'values'
+}
+
 export interface EntityConfig {
   title: string
   endpoint: string
@@ -31,6 +42,7 @@ export interface EntityConfig {
   columns: ColumnSpec[]
   fields: FieldSpec[]
   searchKeys: string[]
+  filters?: FilterSpec[]
 }
 
 const tierOptions = [
@@ -57,6 +69,10 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'is_active', label: 'Active' },
     ],
     searchKeys: ['display_name', 'email'],
+    filters: [
+      { key: 'is_admin', label: 'Admin', kind: 'boolean' },
+      { key: 'is_active', label: 'Active', kind: 'boolean' },
+    ],
     fields: [
       { name: 'display_name', label: 'Name', required: true },
       { name: 'email', label: 'Email', required: true },
@@ -76,6 +92,10 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'address', label: 'Address' },
     ],
     searchKeys: ['name', 'address', 'region'],
+    filters: [
+      { key: 'region', label: 'Region', options: regionOptions },
+      { key: 'country', label: 'Country', kind: 'values' },
+    ],
     fields: [
       { name: 'name', label: 'Name', required: true },
       { name: 'code', label: 'Code (unique)', required: true },
@@ -96,6 +116,9 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'preferred_email', label: 'Email' },
     ],
     searchKeys: ['full_name', 'title', 'preferred_email', 'preferred_phone'],
+    filters: [
+      { key: 'title', label: 'Job title', kind: 'values' },
+    ],
     fields: [
       { name: 'full_name', label: 'Full name', required: true },
       { name: 'title', label: 'Job title' },
@@ -135,6 +158,19 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'tier', label: 'Tier' },
     ],
     searchKeys: [],
+    filters: [
+      { key: 'contact_id', label: 'Contact', optionSource: 'contacts' },
+      { key: 'site_id', label: 'Site', optionSource: 'sites' },
+      { key: 'role_id', label: 'CIMT role', optionSource: 'roles' },
+      { key: 'tier', label: 'Tier', options: tierOptions },
+      {
+        key: 'scope', label: 'Scope',
+        options: [
+          { value: 'site', label: 'Site' },
+          { value: 'corporate', label: 'Corporate' },
+        ],
+      },
+    ],
     fields: [
       { name: 'contact_id', label: 'Contact', type: 'select', optionSource: 'contacts', required: true },
       { name: 'site_id', label: 'Site', type: 'select', optionSource: 'sites', nullable: true },
@@ -161,6 +197,14 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'phone', label: 'Phone' },
     ],
     searchKeys: ['agency_type', 'contact_name', 'phone'],
+    filters: [
+      {
+        key: 'agency_type', label: 'Type',
+        options: ['OSHA', 'SERC', 'LEPC', 'USDA', 'FDA', 'GFSI', 'HOTLINE', 'MEDIA', 'OTHER']
+          .map((v) => ({ value: v, label: v })),
+      },
+      { key: 'site_id', label: 'Site', optionSource: 'sites' },
+    ],
     fields: [
       {
         name: 'agency_type', label: 'Type', type: 'select', required: true,
@@ -184,6 +228,9 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'region', label: 'Region' },
     ],
     searchKeys: ['name'],
+    filters: [
+      { key: 'region', label: 'Region', options: regionOptions },
+    ],
     fields: [
       { name: 'name', label: 'Name', required: true },
       { name: 'region', label: 'Region', type: 'select', options: regionOptions, nullable: true },
@@ -202,6 +249,17 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'work_phone', label: 'Work phone' },
     ],
     searchKeys: ['name', 'email'],
+    filters: [
+      { key: 'customer_id', label: 'Customer', optionSource: 'customers' },
+      {
+        key: 'side', label: 'Side',
+        options: [
+          { value: 'osi_primary', label: 'OSI primary' },
+          { value: 'osi_alternate', label: 'OSI alternate' },
+          { value: 'customer', label: 'Customer side' },
+        ],
+      },
+    ],
     fields: [
       { name: 'customer_id', label: 'Customer', type: 'select', optionSource: 'customers', required: true },
       {
@@ -231,6 +289,10 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'place_name', label: 'Place' },
     ],
     searchKeys: ['section', 'place_name'],
+    filters: [
+      { key: 'site_id', label: 'Site', optionSource: 'sites' },
+      { key: 'section', label: 'Section', kind: 'values' },
+    ],
     fields: [
       { name: 'site_id', label: 'Site', type: 'select', optionSource: 'sites', required: true },
       { name: 'section', label: 'Section (Police, Fire…)', required: true },
@@ -250,6 +312,9 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'phone', label: 'Phone' },
     ],
     searchKeys: ['name', 'phone'],
+    filters: [
+      { key: 'constituent_id', label: 'Place', optionSource: 'constituents' },
+    ],
     fields: [
       { name: 'constituent_id', label: 'Place', type: 'select', optionSource: 'constituents', required: true },
       { name: 'name', label: 'Name' },
@@ -270,6 +335,9 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'war_room_phone', label: 'Phone' },
     ],
     searchKeys: ['war_room_location'],
+    filters: [
+      { key: 'site_id', label: 'Site', optionSource: 'sites' },
+    ],
     fields: [
       { name: 'site_id', label: 'Site', type: 'select', optionSource: 'sites', required: true },
       { name: 'war_room_location', label: 'Workspace location', type: 'textarea' },
@@ -292,6 +360,9 @@ export const entities: Record<string, EntityConfig> = {
       { key: 'file_name', label: 'File' },
     ],
     searchKeys: ['title', 'category'],
+    filters: [
+      { key: 'category', label: 'Category', kind: 'values' },
+    ],
     fields: [
       { name: 'title', label: 'Title', required: true },
       { name: 'category', label: 'Category' },

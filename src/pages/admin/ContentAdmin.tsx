@@ -32,12 +32,25 @@ export function ContentAdmin() {
   const { run } = useContentMutations()
   const navigate = useNavigate()
   const [creating, setCreating] = useState(false)
+  const [search, setSearch] = useState('')
+  const [kindFilter, setKindFilter] = useState('')
+  const [bookFilter, setBookFilter] = useState('')
   const { register, handleSubmit, reset } = useForm({
     defaultValues: { title: '', slug: '', kind: 'guide', book: '' },
   })
 
   if (isPending) return <Loading />
   if (error) return <ErrorNote error={error} />
+
+  const q = search.trim().toLowerCase()
+  const filtered = (pages ?? []).filter((p) =>
+    (!q || [p.title, p.slug, p.book ?? ''].some((s) => s.toLowerCase().includes(q)))
+    && (!kindFilter || p.kind === kindFilter)
+    && (!bookFilter || p.book === bookFilter),
+  )
+  const books = [...new Set((pages ?? []).map((p) => p.book).filter((b): b is string => !!b))].sort()
+  const filtering = Boolean(q || kindFilter || bookFilter)
+  const selectCls = 'min-h-12 rounded-lg border border-line bg-card px-3'
 
   const submit = handleSubmit((data) => {
     run.mutate(
@@ -106,9 +119,48 @@ export function ContentAdmin() {
       {(pages ?? []).length === 0 ? (
         <EmptyState title="No content pages yet" hint='Use "+ New page", or run the content seed.' />
       ) : (
-        // Guides and checklists are separate sections, each under its own heading
-        ([['guide', 'Guides'], ['checklist', 'Checklists'], ['static', 'Static pages']] as const).map(([kind, label]) => {
-          const group = (pages ?? []).filter((p) => p.kind === kind)
+        <>
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search title, slug, book…"
+            className="min-h-12 w-full rounded-lg border border-line bg-card px-4 sm:w-72"
+          />
+          <select value={kindFilter} onChange={(e) => setKindFilter(e.target.value)} className={selectCls} aria-label="Filter by kind">
+            <option value="">All kinds</option>
+            <option value="guide">Guides</option>
+            <option value="checklist">Checklists</option>
+            <option value="static">Static pages</option>
+          </select>
+          {books.length > 0 ? (
+            <select value={bookFilter} onChange={(e) => setBookFilter(e.target.value)} className={selectCls} aria-label="Filter by book">
+              <option value="">All books</option>
+              {books.map((b) => <option key={b} value={b}>{b}</option>)}
+            </select>
+          ) : null}
+          {filtering ? (
+            <button
+              type="button"
+              onClick={() => {
+                setSearch(''); setKindFilter(''); setBookFilter('')
+              }}
+              className="min-h-12 rounded-lg px-3 text-sm font-semibold text-steel hover:bg-line/60"
+            >
+              ✕ Clear
+            </button>
+          ) : null}
+          <span className="text-sm text-steel">
+            {filtered.length} of {(pages ?? []).length}
+          </span>
+        </div>
+        {filtered.length === 0 ? (
+          <EmptyState title="No pages match the current filters" />
+        ) : null}
+        {/* Guides and checklists are separate sections, each under its own heading */}
+        {([['guide', 'Guides'], ['checklist', 'Checklists'], ['static', 'Static pages']] as const).map(([kind, label]) => {
+          const group = filtered.filter((p) => p.kind === kind)
           if (group.length === 0) return null
           return (
             <section key={kind} className="mb-6">
@@ -130,7 +182,8 @@ export function ContentAdmin() {
               </ul>
             </section>
           )
-        })
+        })}
+        </>
       )}
     </div>
   )

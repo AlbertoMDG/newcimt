@@ -2,7 +2,6 @@
 // (close / archive / reopen), and manage members + roles. Custom page — the
 // lifecycle and member panel don't fit the generic EntityAdmin.
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { Link } from 'react-router'
 import type { Incident, IncidentRole } from '@shared/types'
 import {
@@ -13,98 +12,10 @@ import { EmptyState, ErrorNote, Loading, PageHeader } from '../../components/ui'
 import {
   ROLE_LABELS, SEVERITY_LABELS, STATUS_LABELS, SeverityChip, StatusChip, TYPE_LABELS, TypeChip, fmtDate,
 } from '../incidents/common'
+import { WorkspaceModal } from '../incidents/WorkspaceModal'
 
 const inputCls = 'min-h-11 w-full rounded-lg border border-line bg-card px-3 py-2'
 const INVALIDATES = ['incidents', 'incident', 'incident-members', 'stats']
-
-interface IncidentForm {
-  title: string
-  incident_type: string
-  site_id: string
-  severity: string
-  summary: string
-}
-
-function CreateModal({ onClose }: { onClose: () => void }) {
-  const { data: sites } = useSites()
-  const mutation = useApiMutation(INVALIDATES)
-  const { register, handleSubmit, formState } = useForm<IncidentForm>({
-    defaultValues: { title: '', incident_type: 'other', site_id: '', severity: 'medium', summary: '' },
-  })
-
-  const submit = handleSubmit((d) =>
-    mutation.mutate(
-      {
-        path: '/incidents',
-        method: 'POST',
-        body: {
-          title: d.title,
-          incident_type: d.incident_type,
-          site_id: d.site_id === '' ? null : Number(d.site_id),
-          severity: d.severity,
-          summary: d.summary || null,
-        },
-      },
-      { onSuccess: onClose },
-    ),
-  )
-
-  return (
-    <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/50 sm:items-center" role="dialog" aria-modal>
-      <div className="max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-paper p-5 sm:rounded-2xl">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-extrabold">Open a workspace</h2>
-          <button type="button" onClick={onClose} className="min-h-11 px-3 text-xl text-steel" aria-label="Close">✕</button>
-        </div>
-        <form onSubmit={submit} className="space-y-3">
-          <label className="block">
-            <span className="mb-1 block text-sm font-semibold">Title <span className="text-alarm">*</span></span>
-            <input {...register('title', { required: true })} className={inputCls} />
-            {formState.errors.title ? <span className="text-xs font-semibold text-alarm">Required.</span> : null}
-          </label>
-          <label className="block">
-            <span className="mb-1 block text-sm font-semibold">Incident type</span>
-            <select {...register('incident_type')} className={inputCls}>
-              {Object.entries(TYPE_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
-          </label>
-          <label className="block">
-            <span className="mb-1 block text-sm font-semibold">Affected site</span>
-            <select {...register('site_id')} className={inputCls}>
-              <option value="">— (corporate / multi-site)</option>
-              {(sites ?? []).map((s) => <option key={s.site_id} value={s.site_id}>{s.name}</option>)}
-            </select>
-          </label>
-          <label className="block">
-            <span className="mb-1 block text-sm font-semibold">Severity</span>
-            <select {...register('severity')} className={inputCls}>
-              {Object.entries(SEVERITY_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
-          </label>
-          <label className="block">
-            <span className="mb-1 block text-sm font-semibold">Summary</span>
-            <textarea {...register('summary')} rows={3} className={inputCls} />
-          </label>
-          {mutation.isError ? (
-            <p className="rounded-lg bg-alarm-soft p-3 text-sm font-semibold text-alarm-deep">
-              {mutation.error instanceof Error ? mutation.error.message : 'Save failed.'}
-            </p>
-          ) : null}
-          <div className="flex gap-2 pt-2">
-            <button
-              type="submit"
-              disabled={mutation.isPending}
-              className="min-h-12 flex-1 rounded-full bg-accent font-bold text-white hover:bg-accent-deep disabled:opacity-50"
-            >
-              {mutation.isPending ? 'Opening…' : 'Open workspace'}
-            </button>
-            <button type="button" onClick={onClose} className="min-h-12 rounded-full bg-mist px-6 font-semibold">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  )
-}
 
 function MembersPanel({ incident }: { incident: Incident }) {
   const { data: members, isPending } = useIncidentMembers(incident.incident_id)
@@ -330,7 +241,13 @@ export function IncidentsAdmin() {
   const { data: incidents, isPending, error } = useIncidents()
   const { data: sites } = useSites()
   const [creating, setCreating] = useState(false)
+  const [editing, setEditing] = useState(false)
   const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [search, setSearch] = useState('')
+  const [status, setStatus] = useState('')
+  const [type, setType] = useState('')
+  const [severity, setSeverity] = useState('')
+  const [siteId, setSiteId] = useState('')
 
   if (isPending) return <Loading />
   if (error) return <ErrorNote error={error} />
@@ -338,6 +255,18 @@ export function IncidentsAdmin() {
   const siteName = (id: number | null) =>
     id === null ? '—' : (sites?.find((s) => s.site_id === id)?.name ?? `Site ${id}`)
   const selected = (incidents ?? []).find((i) => i.incident_id === selectedId) ?? null
+
+  const q = search.trim().toLowerCase()
+  const rows = (incidents ?? []).filter((i) =>
+    (!q || i.title.toLowerCase().includes(q))
+    && (!status || i.status === status)
+    && (!type || i.incident_type === type)
+    && (!severity || i.severity === severity)
+    && (!siteId || String(i.site_id ?? '') === siteId),
+  )
+  const filtering = Boolean(q || status || type || severity || siteId)
+
+  const selectCls = 'min-h-12 rounded-lg border border-line bg-card px-3'
 
   return (
     <div>
@@ -361,6 +290,46 @@ export function IncidentsAdmin() {
           hint="Open one when an incident starts; add the responders as members."
         />
       ) : (
+        <>
+        <div className="mb-3 flex flex-wrap items-center gap-2">
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search title…"
+            className="min-h-12 w-full rounded-lg border border-line bg-card px-4 sm:w-64"
+          />
+          <select value={status} onChange={(e) => setStatus(e.target.value)} className={selectCls} aria-label="Filter by status">
+            <option value="">All statuses</option>
+            {Object.entries(STATUS_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+          </select>
+          <select value={type} onChange={(e) => setType(e.target.value)} className={selectCls} aria-label="Filter by type">
+            <option value="">All types</option>
+            {Object.entries(TYPE_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+          </select>
+          <select value={severity} onChange={(e) => setSeverity(e.target.value)} className={selectCls} aria-label="Filter by severity">
+            <option value="">All severities</option>
+            {Object.entries(SEVERITY_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+          </select>
+          <select value={siteId} onChange={(e) => setSiteId(e.target.value)} className={selectCls} aria-label="Filter by site">
+            <option value="">All sites</option>
+            {(sites ?? []).map((s) => <option key={s.site_id} value={s.site_id}>{s.name}</option>)}
+          </select>
+          {filtering ? (
+            <button
+              type="button"
+              onClick={() => {
+                setSearch(''); setStatus(''); setType(''); setSeverity(''); setSiteId('')
+              }}
+              className="min-h-12 rounded-lg px-3 text-sm font-semibold text-steel hover:bg-line/60"
+            >
+              ✕ Clear
+            </button>
+          ) : null}
+          <span className="text-sm text-steel">
+            {rows.length} of {(incidents ?? []).length}
+          </span>
+        </div>
         <div className="overflow-x-auto rounded-xl border border-line bg-card">
           <table className="w-full min-w-[640px] text-left text-sm">
             <thead>
@@ -375,7 +344,7 @@ export function IncidentsAdmin() {
               </tr>
             </thead>
             <tbody>
-              {(incidents ?? []).map((i) => (
+              {rows.map((i) => (
                 <tr
                   key={i.incident_id}
                   onClick={() => setSelectedId(i.incident_id === selectedId ? null : i.incident_id)}
@@ -392,9 +361,17 @@ export function IncidentsAdmin() {
                   <td className="px-4 py-3 whitespace-nowrap text-steel">{fmtDate(i.created_at)}</td>
                 </tr>
               ))}
+              {rows.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="px-4 py-8 text-center text-steel">
+                    No workspaces match the current filters.
+                  </td>
+                </tr>
+              ) : null}
             </tbody>
           </table>
         </div>
+        </>
       )}
 
       {selected ? (
@@ -412,6 +389,15 @@ export function IncidentsAdmin() {
             </div>
             <span className="flex flex-wrap items-center gap-2">
               {selected.status !== 'active' ? <ExportButton incidentId={selected.incident_id} /> : null}
+              {selected.status === 'active' ? (
+                <button
+                  type="button"
+                  onClick={() => setEditing(true)}
+                  className="inline-flex min-h-11 items-center rounded-full border border-line bg-card px-4 text-sm font-bold hover:border-ink"
+                >
+                  ✎ Edit
+                </button>
+              ) : null}
               <Link
                 to={`/incidents/${selected.incident_id}`}
                 className="min-h-11 rounded-full bg-accent px-5 text-sm font-bold text-white hover:bg-accent-deep inline-flex items-center"
@@ -431,7 +417,8 @@ export function IncidentsAdmin() {
         </div>
       ) : null}
 
-      {creating ? <CreateModal onClose={() => setCreating(false)} /> : null}
+      {creating ? <WorkspaceModal onClose={() => setCreating(false)} /> : null}
+      {editing && selected ? <WorkspaceModal incident={selected} onClose={() => setEditing(false)} /> : null}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router'
 import { useQuery } from '@tanstack/react-query'
@@ -6,7 +6,7 @@ import {
   api, useConstituents, useContacts, useCrud, useCustomers, useRoles, useSites,
 } from '../../api/client'
 import { EmptyState, Loading, ErrorNote, PageHeader } from '../../components/ui'
-import { entities, type EntityConfig, type FieldSpec, type OptionSource } from './adminConfig'
+import { entities, type EntityConfig, type FieldSpec, type FilterSpec, type OptionSource } from './adminConfig'
 
 type Row = Record<string, unknown>
 
@@ -133,9 +133,17 @@ export function EntityAdmin() {
   const { entity = '' } = useParams()
   const cfg = entities[entity]
   const [search, setSearch] = useState('')
+  const [filters, setFilters] = useState<Record<string, string>>({})
   const [page, setPage] = useState(0)
   const [modal, setModal] = useState<{ open: boolean; row: Row | null }>({ open: false, row: null })
   const lookups = useLookups()
+
+  // the component is reused across admin sections — reset list state on switch
+  useEffect(() => {
+    setSearch('')
+    setFilters({})
+    setPage(0)
+  }, [entity])
 
   const { data, isPending, error } = useQuery({
     // first invalidates entry is the resource key, so admin lists refetch after writes
@@ -146,12 +154,37 @@ export function EntityAdmin() {
   const { create, update, remove } = useCrud(cfg?.endpoint ?? '', cfg?.invalidates ?? [])
 
   const rows = useMemo(() => {
+    let out = data ?? []
     const q = search.trim().toLowerCase()
-    if (!q) return data ?? []
-    return (data ?? []).filter((r) =>
-      cfg.searchKeys.some((k) => String(r[k] ?? '').toLowerCase().includes(q)),
-    )
-  }, [data, search, cfg])
+    if (q) {
+      out = out.filter((r) =>
+        cfg.searchKeys.some((k) => String(r[k] ?? '').toLowerCase().includes(q)),
+      )
+    }
+    for (const f of cfg?.filters ?? []) {
+      const v = filters[f.key]
+      if (!v) continue
+      out = out.filter((r) =>
+        f.kind === 'boolean'
+          ? Boolean(r[f.key]) === (v === 'yes')
+          : String(r[f.key] ?? '') === v,
+      )
+    }
+    return out
+  }, [data, search, filters, cfg])
+
+  // option list for one filter select: fixed list, FK lookup, or distinct data values
+  const filterOptions = (f: FilterSpec): { value: string; label: string }[] => {
+    if (f.kind === 'boolean') return [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }]
+    if (f.optionSource) {
+      return [...lookups[f.optionSource].entries()]
+        .sort((a, b) => a[1].localeCompare(b[1]))
+        .map(([value, label]) => ({ value: String(value), label }))
+    }
+    if (f.options) return f.options
+    const values = [...new Set((data ?? []).map((r) => String(r[f.key] ?? '')).filter(Boolean))]
+    return values.sort((a, b) => a.localeCompare(b)).map((v) => ({ value: v, label: v }))
+  }
 
   const pageCount = Math.max(1, Math.ceil(rows.length / PAGE_SIZE))
   const safePage = Math.min(page, pageCount - 1)
@@ -183,17 +216,51 @@ export function EntityAdmin() {
           </button>
         }
       />
-      {cfg.searchKeys.length > 0 ? (
-        <input
-          type="search"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value)
-            setPage(0)
-          }}
-          placeholder="Search…"
-          className="mb-3 min-h-12 w-full rounded-lg border border-line bg-card px-4 sm:w-80"
-        />
+      {cfg.searchKeys.length > 0 || (cfg.filters ?? []).length > 0 ? (
+        <div className="mb-3 flex flex-wrap items-end gap-2">
+          {cfg.searchKeys.length > 0 ? (
+            <input
+              type="search"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value)
+                setPage(0)
+              }}
+              placeholder="Search…"
+              className="min-h-12 w-full rounded-lg border border-line bg-card px-4 sm:w-72"
+            />
+          ) : null}
+          {(cfg.filters ?? []).map((f) => (
+            <label key={f.key} className="block">
+              <span className="mb-1 block text-xs font-semibold text-steel">{f.label}</span>
+              <select
+                value={filters[f.key] ?? ''}
+                onChange={(e) => {
+                  setFilters({ ...filters, [f.key]: e.target.value })
+                  setPage(0)
+                }}
+                className="min-h-12 max-w-56 rounded-lg border border-line bg-card px-3"
+              >
+                <option value="">All</option>
+                {filterOptions(f).map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </label>
+          ))}
+          {Object.values(filters).some(Boolean) ? (
+            <button
+              type="button"
+              onClick={() => {
+                setFilters({})
+                setPage(0)
+              }}
+              className="min-h-12 rounded-lg px-3 text-sm font-semibold text-steel hover:bg-line/60"
+            >
+              ✕ Clear filters
+            </button>
+          ) : null}
+        </div>
       ) : null}
 
       <p className="mb-2 text-sm text-steel">
