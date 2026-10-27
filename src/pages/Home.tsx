@@ -1,6 +1,8 @@
 import { Link } from 'react-router'
+import { useIncidents } from '../api/client'
 import { PhoneLink } from '../components/ui'
 import { TOPIC_COLORS } from '../components/topicColors'
+import { SeverityChip, TypeChip } from './incidents/common'
 
 const priorities = [
   'Protect human life',
@@ -17,6 +19,48 @@ const books = [
   { slug: 'food', title: 'Food', hint: 'Biological, physical and chemical hazards' },
   { slug: 'media', title: 'Media', hint: 'Press and communication guidance' },
 ]
+
+/** Compact "open for" duration — minutes under an hour, then hours, then days. */
+function openFor(iso: string) {
+  const mins = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 60_000))
+  if (mins < 60) return `${mins}m`
+  const hours = Math.floor(mins / 60)
+  if (hours < 48) return `${hours}h`
+  return `${Math.floor(hours / 24)}d`
+}
+
+/** Active incidents the user can see, with enough substance to act on — hidden when there are none. */
+function ActiveWorkspaces() {
+  const { data: incidents } = useIncidents()
+  const active = (incidents ?? []).filter((i) => i.status === 'active')
+  if (active.length === 0) return null
+  return (
+    <section>
+      <h2 className="mb-3 text-xs font-bold tracking-[0.14em] text-steel uppercase">
+        Active workspaces
+      </h2>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {active.map((i) => (
+          <Link
+            key={i.incident_id}
+            to={`/incidents/${i.incident_id}`}
+            className={`group rounded-2xl bg-card p-4 shadow-card hover:ring-2 hover:ring-accent ${
+              i.severity === 'critical' ? 'ring-2 ring-emergency' : ''
+            }`}
+          >
+            <p className="text-lg font-bold group-hover:text-accent">{i.title}</p>
+            <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-steel">
+              <TypeChip type={i.incident_type} />
+              <SeverityChip severity={i.severity} />
+              <span>· open {openFor(i.created_at)}</span>
+            </p>
+            <p className="mt-3 text-sm font-bold text-accent">Enter workspace ›</p>
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
 
 const quickLinks = [
   { to: '/flow', label: 'Process flow' },
@@ -44,6 +88,8 @@ export function Home() {
           </Link>
         </div>
       </section>
+
+      <ActiveWorkspaces />
 
       <section>
         <h2 className="mb-3 text-xs font-bold tracking-[0.14em] text-steel uppercase">

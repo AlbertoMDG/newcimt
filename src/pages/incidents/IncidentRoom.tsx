@@ -6,6 +6,7 @@ import { Avatar, Card, ErrorNote, Loading, PageHeader } from '../../components/u
 import { ChatPanel } from './ChatPanel'
 import { FilesPanel } from './FilesPanel'
 import { TimelinePanel } from './TimelinePanel'
+import { WorkspaceModal } from './WorkspaceModal'
 import { ROLE_LABELS, RoleChip, SeverityChip, StatusChip, TypeChip, fmtDate } from './common'
 
 const TABS = ['Chat', 'Files', 'Timeline', 'Overview', 'Members'] as const
@@ -47,6 +48,7 @@ export function IncidentRoom() {
   const { data: sites } = useSites()
   const { data: me } = useMe()
   const [tab, setTab] = useState<Tab>('Chat')
+  const [editing, setEditing] = useState(false)
 
   if (isPending) return <Loading />
   if (error) return <ErrorNote error={error} />
@@ -70,6 +72,15 @@ export function IncidentRoom() {
         action={
           <span className="flex flex-wrap items-center gap-2">
             {readOnly && isCommander ? <ExportButton incidentId={incident.incident_id} /> : null}
+            {!readOnly && isCommander ? (
+              <button
+                type="button"
+                onClick={() => setEditing(true)}
+                className="inline-flex min-h-11 items-center rounded-full border border-line bg-card px-4 text-sm font-bold hover:border-ink"
+              >
+                ✎ Edit
+              </button>
+            ) : null}
             {me?.is_admin ? (
               <Link
                 to="/admin/incidents"
@@ -165,6 +176,8 @@ export function IncidentRoom() {
           ) : null}
         </ul>
       ) : null}
+
+      {editing ? <WorkspaceModal incident={incident} onClose={() => setEditing(false)} /> : null}
     </div>
   )
 }

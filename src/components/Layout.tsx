@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { useIncidents, useLogout, useMe } from '../api/client'
+import { WorkspaceModal } from '../pages/incidents/WorkspaceModal'
 import { Avatar } from './ui'
 import { TOPIC_COLORS } from './topicColors'
 
@@ -9,7 +10,8 @@ function ActiveIncidentBanner() {
   const { data: incidents } = useIncidents()
   const location = useLocation()
   const active = (incidents ?? []).filter((i) => i.status === 'active')
-  if (active.length === 0 || location.pathname.startsWith('/incidents')) return null
+  // Home shows the richer "Active workspaces" cards, so skip the banner there too
+  if (active.length === 0 || location.pathname === '/' || location.pathname.startsWith('/incidents')) return null
   const first = active[0]
   return (
     <Link
@@ -76,6 +78,7 @@ function NavItems({ vertical = false }: { vertical?: boolean }) {
 
 export function Shell({ children }: { children?: ReactNode }) {
   const { data: me } = useMe()
+  const [declaring, setDeclaring] = useState(false)
   return (
     <div className="flex min-h-dvh flex-col pb-20 sm:pb-0">
       <header className="sticky top-0 z-20 bg-card shadow-sm">
@@ -93,6 +96,15 @@ export function Shell({ children }: { children?: ReactNode }) {
           <nav className="hidden items-center gap-1 sm:flex">
             <NavItems />
             {me?.is_admin ? (
+              <button
+                type="button"
+                onClick={() => setDeclaring(true)}
+                className="ml-3 flex min-h-10 items-center rounded-full bg-emergency px-4 text-sm font-bold text-white hover:bg-emergency-deep"
+              >
+                ⚑ Open workspace
+              </button>
+            ) : null}
+            {me?.is_admin ? (
               <NavLink
                 to="/admin"
                 className={({ isActive }) =>
@@ -109,6 +121,16 @@ export function Shell({ children }: { children?: ReactNode }) {
           </nav>
           <div className="flex items-center gap-3 sm:hidden">
             {me?.is_admin ? (
+              <button
+                type="button"
+                onClick={() => setDeclaring(true)}
+                aria-label="Open workspace"
+                className="flex min-h-10 min-w-10 items-center justify-center rounded-full bg-emergency text-white"
+              >
+                ⚑
+              </button>
+            ) : null}
+            {me?.is_admin ? (
               <NavLink to="/admin" className="text-sm font-bold text-accent">
                 Admin
               </NavLink>
@@ -120,6 +142,8 @@ export function Shell({ children }: { children?: ReactNode }) {
       </header>
 
       <ActiveIncidentBanner />
+
+      {declaring ? <WorkspaceModal onClose={() => setDeclaring(false)} /> : null}
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 lg:py-8">
         {children ?? <Outlet />}

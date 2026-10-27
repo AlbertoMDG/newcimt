@@ -14,6 +14,13 @@ export const SEVERITY_LABELS: Record<IncidentSeverity, string> = {
   low: 'Low', medium: 'Medium', high: 'High', critical: 'Critical',
 }
 
+export const SEVERITY_DESCRIPTIONS: Record<IncidentSeverity, string> = {
+  low: 'Minor issue handled within normal operations. No injuries and no impact to production or product.',
+  medium: 'Needs coordinated attention. Impact limited to one site or function.',
+  high: 'Serious impact — injuries, production stoppage, or regulatory exposure. Response team required.',
+  critical: 'Severe threat to people, product safety, or the business. Immediate company-wide response.',
+}
+
 export const STATUS_LABELS: Record<IncidentStatus, string> = {
   active: 'Active', closed: 'Closed', archived: 'Archived',
 }
