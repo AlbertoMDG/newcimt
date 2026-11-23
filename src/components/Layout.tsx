@@ -56,7 +56,7 @@ function SendWordNowButton({ compact = false }: { compact?: boolean }) {
       className={
         compact
           ? 'flex min-h-10 min-w-10 items-center justify-center rounded-full border-2 border-emergency text-emergency'
-          : 'ml-3 flex min-h-10 items-center gap-1.5 rounded-full border-2 border-emergency px-4 text-sm font-bold text-emergency hover:bg-emergency hover:text-white'
+          : 'flex min-h-10 items-center gap-1.5 rounded-full border-2 border-emergency px-4 text-sm font-bold text-emergency hover:bg-emergency hover:text-white'
       }
     >
       <span aria-hidden>📢</span>
@@ -84,13 +84,15 @@ function NavItems({ vertical = false }: { vertical?: boolean }) {
           className={({ isActive }) =>
             (vertical
               ? 'flex min-h-12 flex-col items-center justify-center gap-0.5 text-[11px] font-semibold '
-              : 'flex min-h-11 items-center border-b-2 px-3 text-sm font-semibold ') +
+              : 'flex h-11 items-center gap-1.5 border-b-2 px-3.5 text-sm font-semibold ') +
             (isActive
               ? 'border-accent text-accent'
               : 'border-transparent text-steel hover:text-ink')
           }
         >
-          {vertical ? <span aria-hidden className="text-lg leading-none">{item.icon}</span> : null}
+          <span aria-hidden className={vertical ? 'text-lg leading-none' : 'text-base leading-none opacity-70'}>
+            {item.icon}
+          </span>
           {item.label}
         </NavLink>
       ))}
@@ -104,9 +106,10 @@ export function Shell({ children }: { children?: ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col pb-20 sm:pb-0">
       <header className="sticky top-0 z-20 bg-card shadow-sm">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
+        {/* Tier 1 — brand + actions. Section tabs live in their own row below. */}
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
           <Link to="/" className="flex min-w-0 items-center gap-3">
-            <img src="/osiLogo.jpg" alt="OSI Group" className="h-10 w-auto shrink-0" />
+            <img src="/osiLogo.jpg" alt="OSI Group" className="h-9 w-auto shrink-0" />
             <span className="hidden h-8 w-px bg-line md:block" aria-hidden />
             <span className="flex min-w-0 flex-col leading-tight">
               <span className="text-lg font-extrabold tracking-tight text-ink">CIMT</span>
@@ -115,23 +118,23 @@ export function Shell({ children }: { children?: ReactNode }) {
               </span>
             </span>
           </Link>
-          <nav className="hidden items-center gap-1 sm:flex">
-            <NavItems />
+          <div className="hidden items-center gap-2 sm:flex">
             <SendWordNowButton />
             {me?.is_admin ? (
               <button
                 type="button"
                 onClick={() => setDeclaring(true)}
-                className="ml-3 flex min-h-10 items-center rounded-full bg-emergency px-4 text-sm font-bold text-white hover:bg-emergency-deep"
+                className="flex min-h-10 items-center gap-1.5 rounded-full bg-emergency px-4 text-sm font-bold text-white hover:bg-emergency-deep"
               >
-                ⚑ Open workspace
+                <span aria-hidden>⚑</span> Open workspace
               </button>
             ) : null}
+            <span className="mx-1 h-6 w-px bg-line" aria-hidden />
             {me?.is_admin ? (
               <NavLink
                 to="/admin"
                 className={({ isActive }) =>
-                  'ml-3 flex min-h-10 items-center rounded-full px-4 text-sm font-bold ' +
+                  'flex min-h-10 items-center rounded-full px-4 text-sm font-bold ' +
                   (isActive
                     ? 'bg-ink text-white'
                     : 'bg-accent text-white hover:bg-accent-deep')
@@ -140,8 +143,8 @@ export function Shell({ children }: { children?: ReactNode }) {
                 Admin
               </NavLink>
             ) : null}
-            <span className="ml-2"><UserMenu /></span>
-          </nav>
+            <UserMenu />
+          </div>
           <div className="flex items-center gap-3 sm:hidden">
             <SendWordNowButton compact />
             {me?.is_admin ? (
@@ -162,6 +165,12 @@ export function Shell({ children }: { children?: ReactNode }) {
             <UserMenu />
           </div>
         </div>
+        {/* Tier 2 — section tabs (desktop; mobile uses the bottom tab bar) */}
+        <nav className="hidden border-t border-line sm:block">
+          <div className="mx-auto flex max-w-6xl items-center gap-1 px-4">
+            <NavItems />
+          </div>
+        </nav>
         <div className="hazard-stripe" />
       </header>
 
