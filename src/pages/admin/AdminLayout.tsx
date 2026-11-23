@@ -7,7 +7,7 @@ const entityNav = [
   { to: '/admin/users', label: 'Users' },
   { to: '/admin/sites', label: 'Sites' },
   { to: '/admin/contacts', label: 'Contacts' },
-  { to: '/admin/assignments', label: 'Role assignments' },
+  { to: '/admin/assignments', label: 'Team members' },
   { to: '/admin/roles', label: 'CIMT roles' },
   { to: '/admin/external', label: 'External agencies' },
   { to: '/admin/customers', label: 'Customers' },

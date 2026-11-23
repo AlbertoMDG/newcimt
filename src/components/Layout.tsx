@@ -43,6 +43,28 @@ export function UserMenu() {
   )
 }
 
+// External OnSolve / Send Word Now portal for mass notifications. Adjust when IT confirms the tenant URL.
+const SEND_WORD_NOW_URL = 'https://login.sendwordnow.com'
+
+function SendWordNowButton({ compact = false }: { compact?: boolean }) {
+  return (
+    <a
+      href={SEND_WORD_NOW_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Send Word Now — mass notification portal (opens in a new tab)"
+      className={
+        compact
+          ? 'flex min-h-10 min-w-10 items-center justify-center rounded-full border-2 border-emergency text-emergency'
+          : 'ml-3 flex min-h-10 items-center gap-1.5 rounded-full border-2 border-emergency px-4 text-sm font-bold text-emergency hover:bg-emergency hover:text-white'
+      }
+    >
+      <span aria-hidden>📢</span>
+      {compact ? <span className="sr-only">Send Word Now</span> : <>Send Word Now<span aria-hidden>↗</span></>}
+    </a>
+  )
+}
+
 const navItems = [
   { to: '/', label: 'Home', icon: '⌂', end: true },
   { to: '/incidents', label: 'Workspace', icon: '⚑' },
@@ -95,6 +117,7 @@ export function Shell({ children }: { children?: ReactNode }) {
           </Link>
           <nav className="hidden items-center gap-1 sm:flex">
             <NavItems />
+            <SendWordNowButton />
             {me?.is_admin ? (
               <button
                 type="button"
@@ -120,6 +143,7 @@ export function Shell({ children }: { children?: ReactNode }) {
             <span className="ml-2"><UserMenu /></span>
           </nav>
           <div className="flex items-center gap-3 sm:hidden">
+            <SendWordNowButton compact />
             {me?.is_admin ? (
               <button
                 type="button"

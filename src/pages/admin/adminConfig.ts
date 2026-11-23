@@ -147,7 +147,7 @@ export const entities: Record<string, EntityConfig> = {
     ],
   },
   assignments: {
-    title: 'Role assignments',
+    title: 'Team members',
     endpoint: '/assignments',
     idKey: 'assignment_id',
     invalidates: ['assignments', 'internal-book', 'stats'],
